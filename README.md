@@ -3,11 +3,13 @@ All-in-one, undetected CSGO cheat written in Python.
 The cheat includes triggerbot, wallhack and autobunnyhop and is fully undetected by VAC. It comes with a nice Gui and can be installed very easily.
 Requirements Python3 and pip (aswell as CSGO obviously)
 
-Configuration:
+## Getting Started:
 
 Step 1:
+```
 Download Zip File or git clone the repository and unpack the files if needed.
 
+```
 Step 2:
 If installing for the first:
   1. Open a cmd as administrator

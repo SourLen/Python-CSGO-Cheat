@@ -1,3 +1,9 @@
+'''
+Last updated 16.10.20
+'''
+
+
+
 dwEntityList = 0x4D523AC
 dwGlowObjectManager = 0x529A1E0
 m_iGlowIndex = 0xA438

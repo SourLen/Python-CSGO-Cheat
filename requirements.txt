@@ -1,0 +1,5 @@
+pymem
+keyboard
+pywin32
+PyQt5
+threaded

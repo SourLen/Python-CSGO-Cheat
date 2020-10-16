@@ -1,0 +1,9 @@
+1. Install Python with Pip
+2. Open csgo
+3. Open cmd as administrator
+4. Copy the following command into your cmd(one at a time):
+	cd "your path to this file"
+	pip install -r requirements.txt
+	python ProjectLarry.py
+5. Select the features you want to use and click "Inject"
+6. Enjoy

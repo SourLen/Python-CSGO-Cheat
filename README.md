@@ -1,4 +1,4 @@
-# Python-CSGO-Cheat
+# ProjectX
 All-in-one, undetected CSGO cheat written in Python.
 The cheat includes triggerbot, wallhack and autobunnyhop and is fully undetected by VAC. It comes with a nice Gui and can be installed very easily.
 Requirements Python3 and pip (aswell as CSGO obviously)

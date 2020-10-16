@@ -15,7 +15,7 @@ Step 2:
 If installing for the first:
   1. Open a cmd as administrator
   2. Cd into the directory of the cheat
-  3. use "pip install requirements.txt" to install the required libraries
+  3. use "pip install -r requirements.txt" to install the required libraries
  ```
  
 Step 3:

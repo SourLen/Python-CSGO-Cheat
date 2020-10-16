@@ -38,6 +38,6 @@ The cheat has its flaws and sometimes crashes but most of the times problems can
 Remember to update the offsets.py file if theres a new csgo update. I will provide the new file as soon as i have the time too but you can also get the offsets from the hazedumper github (https://github.com/frk1/hazedumper) or update them yourself.
 
 ## Credit To: 
-https://github.com/Snaacky/ for his csgo cheats which i used to learn about CSGP cheating in python.
+https://github.com/Snaacky/ for his csgo cheats which i used to learn about CSGO cheating in python.
 
 

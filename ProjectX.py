@@ -6,8 +6,21 @@ import threading
 import pymem
 import pymem.process
 from PyQt5 import QtCore, QtGui, QtWidgets
-from offsets import *
+import requests
 
+offsets = 'https://raw.githubusercontent.com/kadeeq/ProjectX/main/offsets/offsets.json'
+response = requests.get(offsets).json()
+
+
+dwEntityList = int(response["signatures"]["dwEntityList"])
+dwGlowObjectManager = int(response["signatures"]["dwGlowObjectManager"])
+m_iGlowIndex = int(response["netvars"]["m_iGlowIndex"])
+m_iTeamNum = int(response["netvars"]["m_iTeamNum"])
+dwForceJump = int(response["signatures"]["dwForceJump"])
+dwLocalPlayer = int(response["signatures"]["dwLocalPlayer"])
+m_fFlags = int(response["netvars"]["m_fFlags"])
+dwForceAttack = int(response["signatures"]["dwForceAttack"])
+m_iCrosshairId = int(response["netvars"]["m_iCrosshairId"])
 
 
 bhop_taste = "space"

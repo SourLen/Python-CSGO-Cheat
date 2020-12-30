@@ -1,7 +1,22 @@
 # ProjectX
-All-in-one, undetected CSGO cheat written in Python.
-The cheat includes triggerbot, wallhack and autobunnyhop and is fully undetected by VAC. It comes with a nice Gui and can be installed very easily.
+All in one external CSGO cheat written in python.
+It is currently undetected by VAC but im not reponsible for any future bans.
+It comes with a nice Gui and can be installed very easily.
 Requires Python3 and pip (aswell as CSGO obviously)
+
+## Features
+-Aimbot (Body or head) \
+-Silentaim \
+-RCS \
+-RCS with Aimbot \
+-Triggerbot \
+-Wallhack \
+-Noflash \
+-Radar \
+-Bunnyhop \
+-Customizable FOV changer
+
+
 
 ## Getting Started:
 
@@ -31,6 +46,10 @@ Run the ProjectX.py file from the cmd (preferably as an administrator)
 Step 5:
 ```
 Select your desired settings and click "UPDATE"
+```
+Step 6:
+```
+It is recommended to change the antivac variable every once in a while to change the hash of the file
 ```
 
 ## Notes

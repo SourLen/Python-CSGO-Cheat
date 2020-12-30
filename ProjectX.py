@@ -159,23 +159,30 @@ class Ui_MainWindow( object ):
             self.fovt = self.checkBox_4.isChecked()
             self.trigc = self.checkBox_5.isChecked()
             self.aimc = self.checkBox_6.isChecked()
+
             self.baim = self.checkBox_7.isChecked()
-            self.fovkey = self.lineEdit_2.text()
+            if self.baim and not self.aimc:
+                print('Activate aimbot to use the "Aim for Body function')
+                self.checkBox_7.setChecked(False)
+
             if self.aimc:
                 try:
                     self.aimfov = float( self.lineEdit_4.text() )
                     self.aimkey = str( self.lineEdit_6.text() )
                 except:
-                    print( "AIMBOT VALUES DU WICHSER" )
+                    print( "Use different aimbot values" )
                     self.aimc = False
                     self.checkBox_6.setChecked( False )
             if self.fovt:
                 try:
                     self.fovvalue = int( self.lineEdit.text() )
+                    self.fovkey = self.lineEdit_2.text()
                 except:
-                    print( "FOV VALUE DU HURENSOHN" )
-
-            self.triggerkey = self.lineEdit_3.text()
+                    print( "Use different fov values" )
+            try:
+                self.triggerkey = str(self.lineEdit_3.text())
+            except:
+                print("Use a different triggerkey")
             self.bhc = self.checkBox_8.isChecked()
             self.rcse = self.checkBox_10.isChecked()
             self.silentshit = self.checkBox_9.isChecked()
@@ -386,9 +393,9 @@ class Ui_MainWindow( object ):
         self.checkBox_6.setText( _translate( "ProjectMarya", "Aimbot" ) )
         self.checkBox_7.setText( _translate( "ProjectMarya", "Aim for Body" ) )
         self.lineEdit_2.setText( _translate( "ProjectMarya", "e.g c" ) )
-        self.lineEdit_4.setText( _translate( "ProjectMarya", "1 - 26" ) )
+        self.lineEdit_4.setText( _translate( "ProjectMarya", "any number" ) )
         self.lineEdit.setText( _translate( "ProjectMarya", "any number" ) )
-        self.label.setText( _translate( "ProjectMarya", "FOV Changer" ) )
+        self.label.setText( _translate( "ProjectMarya", "FOV Value" ) )
         self.checkBox_8.setText( _translate( "ProjectMarya", "Bunnyhop" ) )
         self.lineEdit_6.setText( _translate( "ProjectMarya", "e.g alt" ) )
         self.label_2.setText( _translate( "ProjectMarya", "FOV Toggle Key" ) )

@@ -12,7 +12,7 @@ Download Zip File or git clone the repository and unpack the files if needed.
 
 Step 2:
 ```
-If installing for the first:
+If you are installing the cheat for the first installing:
   1. Open a cmd as administrator
   2. Cd into the directory of the cheat
   3. use "pip install -r requirements.txt" to install the required libraries
@@ -39,5 +39,5 @@ I will update the offsets as soon as i can but sometimes it needs some time.
 
 ## Credit To: 
 https://github.com/Snaacky/ for his csgo cheats which i used to learn about CSGO cheating in python.
-
+The unknowncheats and guided hacking community
 

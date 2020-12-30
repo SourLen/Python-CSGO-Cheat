@@ -14,7 +14,8 @@ Requires Python3 and pip (aswell as CSGO obviously)
 -Noflash \
 -Radar \
 -Bunnyhop \
--Customizable FOV changer
+-Customizable FOV changer \
+-Rank reveal in Competitive 
 
 
 

@@ -57,6 +57,6 @@ The cheat has its flaws and sometimes crashes but most of the times problems can
 I will update the offsets as soon as i can but sometimes it needs some time.
 
 ## Credit To: 
-https://github.com/Snaacky/ for his csgo cheats which i used to learn about CSGO cheating in python.
+https://github.com/Snaacky/ for his csgo cheats which i used to learn about CSGO cheating in python. \
 The unknowncheats and guided hacking community
 

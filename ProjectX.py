@@ -560,7 +560,8 @@ class Ui_MainWindow( object ):
                         pm.write_int( glow_manager + entity_glow * 0x38 + 0x24, 1 )  # Enable
 
                     else:
-                        pm.write_int( glow_manager + entity_glow * 0x38 + 0x24, 0 )
+                        pass
+                        #pm.write_int( glow_manager + entity_glow * 0x38 + 0x24, 0 )
 
             if self.trigc and keyboard.is_pressed(
                     self.triggerkey ) and 0 < crosshairID < 32 and localTeam != crosshairTeam and immunitygunganme == 256:

@@ -1,6 +1,6 @@
 pymem
 keyboard
 pywin32
-PyQt5 == 5.9
+PyQt5 
 threaded
 requests

@@ -1,5 +1,4 @@
 import time
-from win32gui import GetWindowText, GetForegroundWindow
 import threading
 import keyboard
 import pymem
@@ -420,9 +419,7 @@ class Ui_MainWindow( object ):
         oldpunchx = 0.0
         oldpunchy = 0.0
         while True:
-            if not GetWindowText( GetForegroundWindow() ) == "Counter-Strike: Global Offensive":
-                time.sleep( 1 )
-                continue
+            
 
             pm.write_uchar( engine + dwbSendPackets, 1 )
             target = None

@@ -44,7 +44,7 @@ dwClientState_PlayerInfo = int( response["signatures"]["dwClientState_PlayerInfo
 dwPlayerResource = int( response["signatures"]["dwPlayerResource"] )
 m_iCompetitiveRanking = int( response["netvars"]["m_iCompetitiveRanking"] )
 eteam = False
-antivac = "foqnmwordqowjm3qlwp5q890wu4892h59ut)ZQ$/Z§W784zw0682732z57890Z/Z/(§$%Z=!""§(%/08($12"
+antivac = "foqnmwordqowjm3qlwp5q890wu4892h59ut"
 print( antivac )
 
 

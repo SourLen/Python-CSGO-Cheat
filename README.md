@@ -1,5 +1,7 @@
 ## My ProjectX Fork!
 
+![APM](https://img.shields.io/apm/l/vim-mode?style=for-the-badge)
+
 ### How to use?
 
 - Install Python with pip
@@ -17,8 +19,9 @@
 
 
 ### Note: 
+
 - Use it in terms of MIT Licence!
-![APM](https://img.shields.io/apm/l/vim-mode?style=for-the-badge)
+
 
 
 ## Disclaimer:

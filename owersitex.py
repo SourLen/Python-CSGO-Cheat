@@ -408,7 +408,7 @@ class Ui_MainWindow( object ):
 
     def retranslateUi(self, ProjectMarya):
         _translate = QtCore.QCoreApplication.translate
-        ProjectMarya.setWindowTitle( _translate( "ProjectMarya", "ProjectX" ) )
+        ProjectMarya.setWindowTitle( _translate( "ProjectMarya", "OwersiteX" ) )
         self.checkBox.setText( _translate( "ProjectMarya", "Wallhack" ) )
         self.checkBox_2.setText( _translate( "ProjectMarya", "NoFlash" ) )
         self.checkBox_3.setText( _translate( "ProjectMarya", "Radar" ) )

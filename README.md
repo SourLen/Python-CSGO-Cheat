@@ -20,7 +20,7 @@
 
 ### Note: 
 
-- Use it in terms of MIT Licence!
+- Use it in terms of it's Licence!
 
 
 

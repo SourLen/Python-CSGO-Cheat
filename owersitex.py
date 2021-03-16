@@ -48,15 +48,16 @@ m_iCompetitiveRanking = int( response["netvars"]["m_iCompetitiveRanking"] )
 eteam = False
 
 
-MAX_LIMIT = 255
+MAX_LIMIT = 180
  
 random_string = ''
  
-for _ in range(10):
-    random_integer = random.randint(0, MAX_LIMIT)
+for _ in range(25):
+    random_integer = random.randint(25, MAX_LIMIT)
     # Keep appending random characters using chr(x)
     random_string += (chr(random_integer))
- 
+    
+print(random_string, len(random_string))
 print(random_string, len(random_string))
 
 antivacsystem = random.randint(35,60)
@@ -64,11 +65,12 @@ print(antivacsystem)
 antivacsystem2 = random.randint(35,60)
 print(antivacsystem2)
 antivacsystem3 = random.randint(35,60)
-
+print(random_string, len(random_string))
 
 print(antivacsystem2)
 print(antivacsystem2)
 print(antivacsystem3)
+print(random_string, len(random_string))
 print(random_string, len(random_string))
 
 def calc_distance(current_x, current_y, new_x, new_y):
@@ -677,7 +679,8 @@ class Ui_MainWindow( object ):
 
                     if pm.read_string( info + 0x10 ) != 'GOTV':
                         print( pm.read_string( info + 0x10 ) + "   -->   " + ranks[rank] )
-
+                      
+print(random_string, len(random_string))
 print(antivacsystem2)
 print(antivacsystem2)
 print(antivacsystem3)

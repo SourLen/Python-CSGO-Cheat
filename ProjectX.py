@@ -2,6 +2,7 @@ import time
 import threading
 import keyboard
 import pymem
+import random # You need this for random int
 import pymem.process
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
@@ -44,9 +45,13 @@ dwClientState_PlayerInfo = int( response["signatures"]["dwClientState_PlayerInfo
 dwPlayerResource = int( response["signatures"]["dwPlayerResource"] )
 m_iCompetitiveRanking = int( response["netvars"]["m_iCompetitiveRanking"] )
 eteam = False
-antivac = "foqnmwordqowjm3qlwp5q890wu4892h59ut"
-print( antivac )
+# Using This is wrong
+# antivac = "foqnmwordqowjm3qlwp5q890wu4892h59ut"
+# print( antivac )
+# Using This is wrong
 
+owersites_anti_vac = random.randint(5,25)
+print(owersites_anti_vac)
 
 def calc_distance(current_x, current_y, new_x, new_y):
     distancex = new_x - current_x

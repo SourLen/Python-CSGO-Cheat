@@ -1,6 +1,6 @@
 pymem
 keyboard
 pywin32
-PyQt5 
+PyQt6
 threaded
 requests

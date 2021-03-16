@@ -5,5 +5,5 @@
 	cd "your path to this file"
 	pip install -r requirements.txt
 	python ProjectX.py
-5. Select the features you want to use and click "Inject"
+5. Select the features you want to use and click "Update"
 6. Enjoy

@@ -18,6 +18,8 @@
 
 ### Note: 
 - Use it in terms of MIT Licence!
+![APM](https://img.shields.io/apm/l/vim-mode?style=for-the-badge)
+
 
 ## Disclaimer:
 Owersite (https://github.com/owersite) is not responsible for whatever you do with this.

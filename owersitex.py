@@ -8,8 +8,11 @@ import pymem.process
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
 from math import *
-
-
+###########
+#
+# github.com/Owersite - 2021
+#
+###########
 offsets = 'https://raw.githubusercontent.com/owersite/Python-CSGO-Cheat/main/offsets/offsets.json'
 response = requests.get( offsets ).json()
 bhop_taste = "space"
@@ -48,30 +51,35 @@ m_iCompetitiveRanking = int( response["netvars"]["m_iCompetitiveRanking"] )
 eteam = False
 
 
-MAX_LIMIT = 180
+MAX_LIMIT = 256
  
-random_string = ''
- 
-for _ in range(25):
+randstring = ''
+
+for _ in range(random.randint(1,90)):
     random_integer = random.randint(25, MAX_LIMIT)
     # Keep appending random characters using chr(x)
-    random_string += (chr(random_integer))
+    randstring += (chr(random_integer))
     
-print(random_string, len(random_string))
-print(random_string, len(random_string))
+randstring2 = ''
+for _ in range(random.randint(90, 390)):
+    random_integer = random.randint(25, MAX_LIMIT)
+    # Keep appending random characters using chr(x)
+    randstring2 += (chr(random_integer))
 
-antivacsystem = random.randint(35,60)
+print(len(randstring2), randstring)
+
+
+antivacsystem = random.randint(1,999999)
 print(antivacsystem)
-antivacsystem2 = random.randint(35,60)
+antivacsystem2 = random.randint(1,999999)
 print(antivacsystem2)
-antivacsystem3 = random.randint(35,60)
-print(random_string, len(random_string))
+antivacsystem3 = random.randint(1,999999)
 
+print(antivacsystem)
 print(antivacsystem2)
-print(antivacsystem2)
-print(antivacsystem3)
-print(random_string, len(random_string))
-print(random_string, len(random_string))
+print(randstring, len(randstring))
+print(randstring2, len(randstring2), randstring2)
+
 
 def calc_distance(current_x, current_y, new_x, new_y):
     distancex = new_x - current_x
@@ -225,19 +233,19 @@ class Ui_MainWindow( object ):
             update = False
         time.sleep( 1 )
 
-    def setupUi(self, ProjectMarya):
-        ProjectMarya.setObjectName( "ProjectMarya" )
-        ProjectMarya.resize( 960, 456 )
+    def setupUi(self, OwersiteX):
+        OwersiteX.setObjectName( "OwersiteX" )
+        OwersiteX.resize( 960, 456 )
         font = QtGui.QFont()
         font.setFamily( "Calibri" )
         font.setPointSize( 20 )
-        ProjectMarya.setFont( font )
+        OwersiteX.setFont( font )
         icon = QtGui.QIcon()
         icon.addPixmap( QtGui.QPixmap( "./pics/bgv7.png" ), QtGui.QIcon.Normal, QtGui.QIcon.Off )
         icon.addPixmap( QtGui.QPixmap( "./pics/bgv7.png" ), QtGui.QIcon.Selected, QtGui.QIcon.On )
-        ProjectMarya.setWindowIcon( icon )
-        ProjectMarya.setStyleSheet( "background-image:url(./pics/bgv7)" )
-        self.centralwidget = QtWidgets.QWidget( ProjectMarya )
+        OwersiteX.setWindowIcon( icon )
+        OwersiteX.setStyleSheet( "background-image:url(./pics/bgv7)" )
+        self.centralwidget = QtWidgets.QWidget( OwersiteX )
         self.centralwidget.setObjectName( "centralwidget" )
         self.checkBox = QtWidgets.QCheckBox( self.centralwidget )
         self.checkBox.setGeometry( QtCore.QRect( 120, 180, 161, 41 ) )
@@ -398,41 +406,41 @@ class Ui_MainWindow( object ):
         self.pushButton_2.setObjectName( "pushButton_2" )
         self.pushButton.clicked.connect( self.update )
         self.pushButton_2.clicked.connect( self.rankreveal )
-        ProjectMarya.setCentralWidget( self.centralwidget )
-        self.statusbar = QtWidgets.QStatusBar( ProjectMarya )
+        OwersiteX.setCentralWidget( self.centralwidget )
+        self.statusbar = QtWidgets.QStatusBar( OwersiteX )
         self.statusbar.setObjectName( "statusbar" )
-        ProjectMarya.setStatusBar( self.statusbar )
+        OwersiteX.setStatusBar( self.statusbar )
 
-        self.retranslateUi( ProjectMarya )
-        QtCore.QMetaObject.connectSlotsByName( ProjectMarya )
+        self.retranslateUi( OwersiteX )
+        QtCore.QMetaObject.connectSlotsByName( OwersiteX )
 
-    def retranslateUi(self, ProjectMarya):
+    def retranslateUi(self, OwersiteX):
         _translate = QtCore.QCoreApplication.translate
-        ProjectMarya.setWindowTitle( _translate( "ProjectMarya", "OwersiteX" ) )
-        self.checkBox.setText( _translate( "ProjectMarya", "Wallhack" ) )
-        self.checkBox_2.setText( _translate( "ProjectMarya", "NoFlash" ) )
-        self.checkBox_3.setText( _translate( "ProjectMarya", "Radar" ) )
-        self.checkBox_4.setText( _translate( "ProjectMarya", "FOV Changer" ) )
-        self.checkBox_5.setText( _translate( "ProjectMarya", "Triggerbot" ) )
-        self.checkBox_6.setText( _translate( "ProjectMarya", "Aimbot" ) )
-        self.checkBox_7.setText( _translate( "ProjectMarya", "Aim for Body" ) )
-        self.lineEdit_2.setText( _translate( "ProjectMarya", "e.g c" ) )
-        self.lineEdit_4.setText( _translate( "ProjectMarya", "any number" ) )
-        self.lineEdit.setText( _translate( "ProjectMarya", "any number" ) )
-        self.label.setText( _translate( "ProjectMarya", "FOV Value" ) )
-        self.checkBox_8.setText( _translate( "ProjectMarya", "Bunnyhop" ) )
-        self.lineEdit_6.setText( _translate( "ProjectMarya", "e.g alt" ) )
-        self.label_2.setText( _translate( "ProjectMarya", "FOV Toggle Key" ) )
-        self.label_3.setText( _translate( "ProjectMarya", "Triggerbot Key" ) )
-        self.label_4.setText( _translate( "ProjectMarya", "Aimbot FOV" ) )
-        self.lineEdit_3.setText( _translate( "ProjectMarya", "e.g shift" ) )
-        self.label_6.setText( _translate( "ProjectMarya", "Aimbot Key" ) )
-        self.pushButton.setText( _translate( "ProjectMarya", "UPDATE" ) )
-        self.checkBox_9.setText( _translate( "ProjectMarya", "Silentaim" ) )
-        self.checkBox_10.setText( _translate( "ProjectMarya", "Recoil Control" ) )
-        self.checkBox_11.setText( _translate( "ProjectMarya", "Hold To Change" ) )
-        self.checkBox_12.setText( _translate( "ProjectMarya", "RCS with Aimbot" ) )
-        self.pushButton_2.setText( _translate( "ProjectMarya", "Rank Reveal" ) )
+        OwersiteX.setWindowTitle( _translate( "OwersiteX", "OwersiteX" ) )
+        self.checkBox.setText( _translate( "OwersiteX", "Wallhack" ) )
+        self.checkBox_2.setText( _translate( "OwersiteX", "NoFlash" ) )
+        self.checkBox_3.setText( _translate( "OwersiteX", "Radar" ) )
+        self.checkBox_4.setText( _translate( "OwersiteX", "FOV Changer" ) )
+        self.checkBox_5.setText( _translate( "OwersiteX", "Triggerbot" ) )
+        self.checkBox_6.setText( _translate( "OwersiteX", "Aimbot" ) )
+        self.checkBox_7.setText( _translate( "OwersiteX", "Aim for Body" ) )
+        self.lineEdit_2.setText( _translate( "OwersiteX", "e.g c" ) )
+        self.lineEdit_4.setText( _translate( "OwersiteX", "any number" ) )
+        self.lineEdit.setText( _translate( "OwersiteX", "any number" ) )
+        self.label.setText( _translate( "OwersiteX", "FOV Value" ) )
+        self.checkBox_8.setText( _translate( "OwersiteX", "Bunnyhop" ) )
+        self.lineEdit_6.setText( _translate( "OwersiteX", "ctrl" ) )
+        self.label_2.setText( _translate( "OwersiteX", "FOV Toggle Key" ) )
+        self.label_3.setText( _translate( "OwersiteX", "Triggerbot Key" ) )
+        self.label_4.setText( _translate( "OwersiteX", "Aimbot FOV" ) )
+        self.lineEdit_3.setText( _translate( "OwersiteX", "alt" ) )
+        self.label_6.setText( _translate( "OwersiteX", "Aimbot Key" ) )
+        self.pushButton.setText( _translate( "OwersiteX", "UPDATE" ) )
+        self.checkBox_9.setText( _translate( "OwersiteX", "Silentaim" ) )
+        self.checkBox_10.setText( _translate( "OwersiteX", "Recoil Control" ) )
+        self.checkBox_11.setText( _translate( "OwersiteX", "Hold To Change" ) )
+        self.checkBox_12.setText( _translate( "OwersiteX", "RCS with Aimbot" ) )
+        self.pushButton_2.setText( _translate( "OwersiteX", "Rank Reveal" ) )
 
     def main(self):
 
@@ -680,11 +688,17 @@ class Ui_MainWindow( object ):
                     if pm.read_string( info + 0x10 ) != 'GOTV':
                         print( pm.read_string( info + 0x10 ) + "   -->   " + ranks[rank] )
                       
-print(random_string, len(random_string))
-print(antivacsystem2)
-print(antivacsystem2)
+                      
+print(randstring, len(randstring) / 2)
 print(antivacsystem3)
-print(random_string, len(random_string))
+print(antivacsystem)
+print(randstring2, len(randstring) *10)
+print(antivacsystem2)
+print(randstring2)
+
+print(' ')
+print(' ')
+print(' ')
 
 
 if __name__ == "__main__":

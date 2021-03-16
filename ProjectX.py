@@ -58,9 +58,17 @@ for _ in range(10):
  
 print(random_string, len(random_string))
 
-antivacsystem = random.randint(25,50)
+antivacsystem = random.randint(35,60)
 print(antivacsystem)
+antivacsystem2 = random.randint(35,60)
+print(antivacsystem2)
+antivacsystem3 = random.randint(35,60)
 
+
+print(antivacsystem2)
+print(antivacsystem2)
+print(antivacsystem3)
+print(random_string, len(random_string))
 
 def calc_distance(current_x, current_y, new_x, new_y):
     distancex = new_x - current_x
@@ -668,6 +676,11 @@ class Ui_MainWindow( object ):
 
                     if pm.read_string( info + 0x10 ) != 'GOTV':
                         print( pm.read_string( info + 0x10 ) + "   -->   " + ranks[rank] )
+
+print(antivacsystem2)
+print(antivacsystem2)
+print(antivacsystem3)
+print(random_string, len(random_string))
 
 
 if __name__ == "__main__":

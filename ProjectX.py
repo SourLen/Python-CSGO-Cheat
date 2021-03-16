@@ -9,7 +9,7 @@ import requests
 from math import *
 
 
-offsets = 'https://raw.githubusercontent.com/kadeeq/ProjectX/main/offsets/offsets.json'
+offsets = 'https://raw.githubusercontent.com/owersite/Python-CSGO-Cheat/main/offsets/offsets.json'
 response = requests.get( offsets ).json()
 bhop_taste = "space"
 

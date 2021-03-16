@@ -3,6 +3,7 @@ import threading
 import keyboard
 import pymem
 import random
+import string
 import pymem.process
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests

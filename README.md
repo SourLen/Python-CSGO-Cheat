@@ -16,6 +16,10 @@
 ##### Find  1. line of code and change it with yours offsets.json ! (on picture above) 
 
 
+### Note: 
+- Use it in terms of MIT Licence!
 
+## Disclaimer:
+Owersite (https://github.com/owersite) is not responsible for whatever you do with this.
 
 ##### Original: https://github.com/naaax123/Python-CSGO-Cheat

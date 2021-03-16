@@ -2,6 +2,7 @@ import time
 import threading
 import keyboard
 import pymem
+import random
 import pymem.process
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
@@ -44,8 +45,21 @@ dwClientState_PlayerInfo = int( response["signatures"]["dwClientState_PlayerInfo
 dwPlayerResource = int( response["signatures"]["dwPlayerResource"] )
 m_iCompetitiveRanking = int( response["netvars"]["m_iCompetitiveRanking"] )
 eteam = False
-antivac = "foqnmwordqowjm3qlwp5q890wu4892h59ut"
-print( antivac )
+
+
+MAX_LIMIT = 255
+ 
+random_string = ''
+ 
+for _ in range(10):
+    random_integer = random.randint(0, MAX_LIMIT)
+    # Keep appending random characters using chr(x)
+    random_string += (chr(random_integer))
+ 
+print(random_string, len(random_string))
+
+antivacsystem = random.randint(25,50)
+print(antivacsystem)
 
 
 def calc_distance(current_x, current_y, new_x, new_y):

@@ -2,17 +2,17 @@ import time
 import threading
 import keyboard
 import pymem
-import random # You need this for random int
 import pymem.process
 from PyQt5 import QtCore, QtGui, QtWidgets
 import requests
 from math import *
-
+import ctypes
+import random
 
 offsets = 'https://raw.githubusercontent.com/kadeeq/ProjectX/main/offsets/offsets.json'
 response = requests.get( offsets ).json()
 bhop_taste = "space"
-
+m_iCompetitiveWins = int(response["netvars"]["m_iCompetitiveWins"])
 dwEntityList = int( response["signatures"]["dwEntityList"] )
 dwGlowObjectManager = int( response["signatures"]["dwGlowObjectManager"] )
 m_iGlowIndex = int( response["netvars"]["m_iGlowIndex"] )
@@ -45,13 +45,28 @@ dwClientState_PlayerInfo = int( response["signatures"]["dwClientState_PlayerInfo
 dwPlayerResource = int( response["signatures"]["dwPlayerResource"] )
 m_iCompetitiveRanking = int( response["netvars"]["m_iCompetitiveRanking"] )
 eteam = False
-# Using This is wrong
-# antivac = "foqnmwordqowjm3qlwp5q890wu4892h59ut"
-# print( antivac )
-# Using This is wrong
+antivacv2 = random.randint(1,100)
+antivac = "foqnmwordqowjm333q3q3q3q5q4q3"
+print(antivac)
+print(antivacv2)
 
-owersites_anti_vac = random.randint(5,25)
-print(owersites_anti_vac)
+user32 = ctypes.windll.user32
+
+def GetWindowText(handle, length=100):
+
+    window_text = ctypes.create_string_buffer(length)
+    user32.GetWindowTextA(
+        handle,
+        ctypes.byref(window_text),
+        length
+    )
+
+    return window_text.value
+
+
+def GetForegroundWindow():
+
+    return user32.GetForegroundWindow()
 
 def calc_distance(current_x, current_y, new_x, new_y):
     distancex = new_x - current_x
@@ -424,7 +439,10 @@ class Ui_MainWindow( object ):
         oldpunchx = 0.0
         oldpunchy = 0.0
         while True:
-            
+
+            if not GetWindowText(GetForegroundWindow()).decode('cp1252') == "Counter-Strike: Global Offensive":
+                time.sleep(1)
+                continue
 
             pm.write_uchar( engine + dwbSendPackets, 1 )
             target = None
@@ -445,7 +463,7 @@ class Ui_MainWindow( object ):
                     time.sleep( 5 )
                     continue
 
-            for i in range( 1, 32 ):
+            for i in range( 1, 64 ):
                 entity = pm.read_int( client + dwEntityList + i * 0x10 )
 
                 if entity:
@@ -563,10 +581,10 @@ class Ui_MainWindow( object ):
 
                     else:
                         pass
-                        #pm.write_int( glow_manager + entity_glow * 0x38 + 0x24, 0 )
+
 
             if self.trigc and keyboard.is_pressed(
-                    self.triggerkey ) and 0 < crosshairID < 32 and localTeam != crosshairTeam and immunitygunganme == 256:
+                    self.triggerkey ) and 0 < crosshairID <= 64 and localTeam != crosshairTeam:
                 pm.write_int( client + dwForceAttack, 6 )
 
             if self.nf and player:
@@ -625,40 +643,41 @@ class Ui_MainWindow( object ):
         client = pymem.process.module_from_name( pm.process_handle, "client.dll" )
         engine = pymem.process.module_from_name( pm.process_handle, "engine.dll" )
         ranks = ["Unranked",
-                 "Silver I",
-                 "Silver II",
-                 "Silver III",
-                 "Silver IV",
-                 "Silver Elite",
-                 "Silver Elite Master",
-                 "Gold Nova I",
-                 "Gold Nova II",
-                 "Gold Nova III",
-                 "Gold Nova Master",
-                 "Master Guardian I",
-                 "Master Guardian II",
-                 "Master Guardian Elite",
-                 "Distinguished Master Guardian",
-                 "Legendary Eagle",
-                 "Legendary Eagle Master",
-                 "Supreme Master First Class",
-                 "The Global Elite"]
-        for i in range( 1, 32 ):
+                    "Silver I",
+                     "Silver II",
+                     "Silver III",
+                     "Silver IV",
+                     "Silver Elite",
+                     "Silver Elite Master",
+                     "Gold Nova I",
+                     "Gold Nova II",
+                     "Gold Nova III",
+                     "Gold Nova Master",
+                     "Master Guardian I",
+                     "Master Guardian II",
+                     "Master Guardian Elite",
+                     "Distinguished Master Guardian",
+                     "Legendary Eagle",
+                     "Legendary Eagle Master",
+                     "Supreme Master First Class",
+                     "The Global Elite"]
+        for i in range( 0, 32 ):
             entity = pm.read_int( client.lpBaseOfDll + dwEntityList + i * 0x10 )
 
             if entity:
                 entity_team_id = pm.read_int( entity + m_iTeamNum )
-                entity_i = pm.read_int( client.lpBaseOfDll + dwLocalPlayer )
-                if entity_team_id != pm.read_int( entity_i + m_iTeamNum ):
+                if entity_team_id :
                     player_info = pm.read_int(
-                        (pm.read_int( engine.lpBaseOfDll + dwClientState )) + dwClientState_PlayerInfo )
+                            (pm.read_int( engine.lpBaseOfDll + dwClientState )) + dwClientState_PlayerInfo )
                     player_info_items = pm.read_int( pm.read_int( player_info + 0x40 ) + 0xC )
                     info = pm.read_int( player_info_items + 0x28 + (i * 0x34) )
                     playerres = pm.read_int( client.lpBaseOfDll + dwPlayerResource )
-                    rank = pm.read_int( playerres + m_iCompetitiveRanking + i * 4 )
-
+                    rank = pm.read_int( playerres + m_iCompetitiveRanking + (i * 4 ))
+                    wins = pm.read_int(playerres + m_iCompetitiveWins + i * 4)
                     if pm.read_string( info + 0x10 ) != 'GOTV':
+                        print(rank)
                         print( pm.read_string( info + 0x10 ) + "   -->   " + ranks[rank] )
+                        print(wins)
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 pymem
 keyboard
-PyQt6
+PyQt5
 threaded
 requests
 ctypes

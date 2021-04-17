@@ -530,23 +530,24 @@ class Ui_MainWindow( object ):
                                 VerifedOldUser = VerifedCommands + ((Desired - 1) % 150) * 0x68
                                 m_buttons = pm.read_int( OldUser + 0x30 )
                                 Net_Channel = pm.read_uint( engine_pointer + clientstate_net_channel )
-                                if pm.read_int( Net_Channel + 0x18 ) >= Desired:
-                                    if self.aimrcs:
-                                        pm.write_float( OldUser + 0x0C, normalize_x )
-                                        pm.write_float( OldUser + 0x10, normalize_y)
-                                        pm.write_int( OldUser + 0x30, m_buttons | (1 << 0) )
-                                        pm.write_float( VerifedOldUser + 0x0C, normalize_x - (punchx * 2) )
-                                        pm.write_float( VerifedOldUser + 0x10, normalize_y - (punchy * 2) )
-                                        pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
-                                        pm.write_uchar( engine + dwbSendPackets, 1 )
-                                    else:
-                                        pm.write_float( OldUser + 0x0C, normalize_x )
-                                        pm.write_float( OldUser + 0x10, normalize_y )
-                                        pm.write_int( OldUser + 0x30, m_buttons | (1 << 0) )
-                                        pm.write_float( VerifedOldUser + 0x0C, normalize_x )
-                                        pm.write_float( VerifedOldUser + 0x10, normalize_y )
-                                        pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
-                                        pm.write_uchar( engine + dwbSendPackets, 1 )
+                                if pm.read_int( Net_Channel + 0x18 ) < Desired:
+                                    pass
+                                elif self.aimrcs:
+                                    pm.write_float( OldUser + 0x0C, normalize_x )
+                                    pm.write_float( OldUser + 0x10, normalize_y)
+                                    pm.write_int( OldUser + 0x30, m_buttons | (1 << 0) )
+                                    pm.write_float( VerifedOldUser + 0x0C, normalize_x - (punchx * 2) )
+                                    pm.write_float( VerifedOldUser + 0x10, normalize_y - (punchy * 2) )
+                                    pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
+                                    pm.write_uchar( engine + dwbSendPackets, 1 )
+                                else:
+                                    pm.write_float( OldUser + 0x0C, normalize_x )
+                                    pm.write_float( OldUser + 0x10, normalize_y )
+                                    pm.write_int( OldUser + 0x30, m_buttons | (1 << 0) )
+                                    pm.write_float( VerifedOldUser + 0x0C, normalize_x )
+                                    pm.write_float( VerifedOldUser + 0x10, normalize_y )
+                                    pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
+                                    pm.write_uchar( engine + dwbSendPackets, 1 )
 
                             elif self.aimrcs and pm.read_int( player + m_iShotsFired ) > 1:
                                 pm.write_float( engine_pointer + dwClientState_ViewAngles, normalize_x - (punchx * 2) )

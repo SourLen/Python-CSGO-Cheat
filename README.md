@@ -1,6 +1,6 @@
 # ProjectX
 All in one external CSGO cheat written in python.
-It is currently undetected by VAC but im not reponsible for any future bans.
+It is probably undetected by VAC but im not reponsible for any future bans if you use this cheat in competitive. I have only tested this cheat against bots and you shouldnt use it against real people. This is ONLY MEANT AS A POC!
 It comes with a nice Gui and can be installed very easily.
 Requires Python3 and pip (aswell as CSGO obviously)
 

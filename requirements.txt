@@ -3,4 +3,4 @@ keyboard
 PyQt5
 threaded
 requests
-ctypes
+

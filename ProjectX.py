@@ -563,22 +563,22 @@ class Ui_MainWindow( object ):
 
                     if self.whc and entity_team_id == 2 and (
                             eteam or localTeam != 2) and not entity_dormant:  # Terrorist Glow
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x4, float( r ) )  # R
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x8, float( g ) )  # G
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0xC, float( b ) )  # B
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x10, float( 255 ) )  # A
+                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x8, float( r ) )  # R
+                        pm.write_float( glow_manager + entity_glow * 0x38 + 0xC, float( g ) )  # G
+                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x10, float( b ) )  # B
+                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x14, float( 255 ) )  # A
 
-                        pm.write_int( glow_manager + entity_glow * 0x38 + 0x24, 1 )  # Enable
+                        pm.write_int( glow_manager + entity_glow * 0x38 + 0x28, 1 )  # Enable
 
 
                     elif self.whc and entity_team_id == 3 and (
                             eteam or localTeam != 3) and not entity_dormant:  # Anti Glow
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x4, float( r ) )  # R
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x8, float( g ) )  # G
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0xC, float( b ) )  # B
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x10, float( 255 ) )  # A
+                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x8, float( r ) )  # R
+                        pm.write_float( glow_manager + entity_glow * 0x38 + 0xC, float( g ) )  # G
+                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x10, float( b ) )  # B
+                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x14, float( 255 ) )  # A
 
-                        pm.write_int( glow_manager + entity_glow * 0x38 + 0x24, 1 )  # Enable
+                        pm.write_int( glow_manager + entity_glow * 0x38 + 0x28, 1 )  # Enable
 
                     else:
                         pass

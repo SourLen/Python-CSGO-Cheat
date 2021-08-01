@@ -130,14 +130,17 @@ def Distance(src_x, src_y, src_z, dst_x, dst_y, dst_z):
 
 
 def calcangle(localpos1, localpos2, localpos3, enemypos1, enemypos2, enemypos3):
-    delta_x = localpos1 - enemypos1
-    delta_y = localpos2 - enemypos2
-    delta_z = localpos3 - enemypos3
-    hyp = sqrt( delta_x * delta_x + delta_y * delta_y + delta_z * delta_z )
-    x = asin( delta_z / hyp ) * 57.295779513082
-    y = atan( delta_y / delta_x ) * 57.295779513082
-    if delta_x >= 0.0:
-        y += 180.0
+    try:
+        delta_x = localpos1 - enemypos1
+        delta_y = localpos2 - enemypos2
+        delta_z = localpos3 - enemypos3
+        hyp = sqrt( delta_x * delta_x + delta_y * delta_y + delta_z * delta_z )
+        x = asin( delta_z / hyp ) * 57.295779513082
+        y = atan( delta_y / delta_x ) * 57.295779513082
+        if delta_x >= 0.0:
+            y += 180.0
+    except:
+        return 0,0
     return x, y
 
 

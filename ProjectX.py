@@ -1,6 +1,6 @@
 import time
 import threading
-import keyboard
+import keyboard, mouse
 import pymem
 import pymem.process
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -51,6 +51,11 @@ print(antivac)
 print(antivacv2)
 
 user32 = ctypes.windll.user32
+def is_press(key):
+    if key != "x2" and key != "x" and key != "right" and key != "wheel" and key != "left":
+        return keyboard.is_pressed(key)
+    else:
+        return mouse.is_pressed(key)
 
 def GetWindowText(handle, length=100):
 
@@ -190,7 +195,16 @@ class Ui_MainWindow( object ):
             if self.aimc:
                 try:
                     self.aimfov = float( self.lineEdit_4.text() )
-                    self.aimkey = str( self.lineEdit_6.text() )
+                    if self.lineEdit_6.text() == "MB5":
+                        self.aimkey = "x2"
+                    elif self.lineEdit_6.text()=="MB4":
+                        self.aimkey = "x"
+                    elif self.lineEdit_6.text() == "ML":
+                        self.aimkey = "left"
+                    elif self.lineEdit_6.text() == "MR":
+                        self.aimkey = "right"
+                    else:
+                        self.aimkey = str( self.lineEdit_6.text() )
                 except:
                     print( "Use different aimbot values" )
                     self.aimc = False
@@ -198,11 +212,29 @@ class Ui_MainWindow( object ):
             if self.fovt:
                 try:
                     self.fovvalue = int( self.lineEdit.text() )
-                    self.fovkey = self.lineEdit_2.text()
+                    if self.lineEdit_2.text() == "MB5":
+                        self.fovkey = "x2"
+                    elif self.lineEdit_2.text() == "MB4":
+                        self.fovkey = "x"
+                    elif self.lineEdit_2.text() == "ML":
+                        self.fovkey = "left"
+                    elif self.lineEdit_2.text() == "MR":
+                        self.fovkey = "right"
+                    else:
+                        self.fovkey = str(self.lineEdit_2.text())
                 except:
                     print( "Use different fov values" )
             try:
-                self.triggerkey = str(self.lineEdit_3.text())
+                if self.lineEdit_3.text() == "MB5":
+                    self.triggerkey  = "x2"
+                elif self.lineEdit_3.text() == "MB4":
+                    self.triggerkey  = "x"
+                elif self.lineEdit_3.text() == "ML":
+                    self.triggerkey  = "left"
+                elif self.lineEdit_3.text() == "MR":
+                    self.triggerkey = "right"
+                else:
+                    self.triggerkey = str(self.lineEdit_3.text())
             except:
                 print("Use a different triggerkey")
             self.bhc = self.checkBox_8.isChecked()
@@ -518,7 +550,7 @@ class Ui_MainWindow( object ):
                             olddistx, olddisty = newdist_x, newdist_y
                             target, target_hp, target_dormant = entity, entity_hp, entity_dormant
                             target_x, target_y, target_z = entitypos_x, entitypos_y, entitypos_z
-                    if self.aimc and keyboard.is_pressed( self.aimkey ) and player:
+                    if self.aimc and is_press( self.aimkey ) and player:
                         if target and target_hp > 0 and not target_dormant:
                             pitch, yaw = calcangle( localpos1, localpos2, localpos3, target_x, target_y, target_z )
                             normalize_x, normalize_y = normalizeAngles( pitch, yaw )
@@ -587,7 +619,7 @@ class Ui_MainWindow( object ):
                         pass
 
 
-            if self.trigc and keyboard.is_pressed(
+            if self.trigc and is_press(
                     self.triggerkey ) and 0 < crosshairID <= 64 and localTeam != crosshairTeam:
                 pm.write_int( client + dwForceAttack, 6 )
 
@@ -624,19 +656,19 @@ class Ui_MainWindow( object ):
                     fovshit = player + m_iDefaultFOV
                     pm.write_int( fovshit, 90 )
 
-                if self.fovt and keyboard.is_pressed( self.fovkey ):
+                if self.fovt and is_press( self.fovkey ):
                     self.fovtog = not self.fovtog
                     time.sleep( 0.25 )
 
             if self.larryfov and player:
                 fovshit = player + m_iDefaultFOV
-                if keyboard.is_pressed( self.fovkey ):
+                if is_press( self.fovkey ):
                     self.pm.write_int( fovshit, self.fovvalue )
                 else:
                     self.pm.write_int( fovshit, 90 )
 
             if self.bhc:
-                if keyboard.is_pressed( "space" ):
+                if is_press( "space" ):
                     force_jump = client + dwForceJump
                     on_ground = pm.read_int( player + m_fFlags )
                     if player and on_ground == 257 or on_ground == 263:

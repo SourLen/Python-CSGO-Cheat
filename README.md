@@ -16,7 +16,9 @@ Video Tutorial: https://youtu.be/eaP6Hr_uzSs
 -Radar \
 -Bunnyhop \
 -Customizable FOV changer \
--Rank reveal in Competitive 
+-Rank reveal in Competitive \
+-Auto-updating offsets \
+-Chams \
 
 
 

@@ -19,7 +19,6 @@ from Utils.rcs import *
 from Utils.Chams import Chams, ResetChams
 import threading
 from Utils.WallhackFunctions import *
-from Utils.Skinchanger import *
 from Classes.Ui1 import *
 
 client = pymem.process.module_from_name( pm.process_handle, "client.dll" ).lpBaseOfDll

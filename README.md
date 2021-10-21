@@ -18,7 +18,7 @@ Video Tutorial: https://youtu.be/eaP6Hr_uzSs
 -Customizable FOV changer \
 -Rank reveal in Competitive \
 -Auto-updating offsets \
--Chams \
+-Chams 
 
 
 
@@ -44,7 +44,7 @@ Open CSGO and start a match
 
 Step 4:
 ```
-Run the ProjectX.py file from the cmd (preferably as an administrator)
+Run the ProjectX_V2.py file from the cmd (preferably as an administrator)
 ```
 
 Step 5:

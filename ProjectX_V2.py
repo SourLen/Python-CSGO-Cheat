@@ -74,7 +74,7 @@ def main():
                     shootatTarget(pm,client,engine,localpos,targetpos,player,engine_pointer, ui.Silentaim, ui.AimRCS, ui.Aimbotkey)
 
             if ui.Trigger:
-                shootTrigger(pm, crosshairID, client, localTeam, crosshairTeam)
+                shootTrigger(pm, crosshairID, client, localTeam, crosshairTeam, ui.Triggerkey)
 
 
             if ui.Noflash:

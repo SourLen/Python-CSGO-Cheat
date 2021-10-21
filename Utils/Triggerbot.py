@@ -1,6 +1,6 @@
 import keyboard
 from Utils.Offsets import *
-from Settings import *
+
 
 
 def shootTrigger(pm, CrossID, client, lTeam, CTeam):

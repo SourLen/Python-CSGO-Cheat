@@ -9,7 +9,7 @@ from math import *
 import ctypes
 import random
 
-offsets = 'https://raw.githubusercontent.com/kadeeq/ProjectX/main/offsets/offsets.json'
+offsets = 'https://raw.githubusercontent.com/XanOpiat/Python-CSGO-Cheat/main/offsets/offsets.json'
 response = requests.get( offsets ).json()
 bhop_taste = "space"
 m_iCompetitiveWins = int(response["netvars"]["m_iCompetitiveWins"])

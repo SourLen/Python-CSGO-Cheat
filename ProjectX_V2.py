@@ -114,7 +114,7 @@ def main():
                 oldviewangle = y_angle
 
             for i in range( 0, 64 ):
-                entity = pm.read_int( client + dwEntityList + i * 0x10 )
+                entity = pm.read_uint( client + dwEntityList + i * 0x10 )
 
                 if entity:
                     entity_glow, entity_team_id, entity_isdefusing, entity_hp, entity_dormant = GetEntityVars(pm, entity)

@@ -62,5 +62,6 @@ I will update the offsets as soon as i can but sometimes it needs some time.
 
 ## Credit To: 
 https://github.com/Snaacky/ for his csgo cheats which i used to learn about CSGO cheating in python. \
-The unknowncheats and guided hacking community
+The unknowncheats and guided hacking community \ 
+https://github.com/lkean9 for helping me figure out multpile very wierd errors.
 

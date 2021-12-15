@@ -53,7 +53,7 @@ def main():
     print("CHEAT STARTED")
     while True:
         try:
-            if not GetWindowText( GetForegroundWindow() ).decode( 'cp1252' ) == "Counter-Strike: Global Offensive":
+            if not GetWindowText( GetForegroundWindow() ).decode( 'cp1252' ) == "Counter-Strike: Global Offensive - Direct3D 9":
                 time.sleep( 1 )
                 continue
 

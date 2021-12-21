@@ -89,7 +89,7 @@ def GetBestTarget(pm, client, engine, localPlayer, spotted, baim, aimfov):
         target = None
         PlayerID = checkindex( pm, client , engine)
         player_team = pm.read_int(localPlayer + m_iTeamNum)
-        engine_pointer = pm.read_int( engine + dwClientState )
+        engine_pointer = pm.read_uint( engine + dwClientState )
         for i in range(1, 32):
             entity = pm.read_int( client + dwEntityList + i * 0x10 )
 

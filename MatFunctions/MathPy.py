@@ -114,7 +114,7 @@ def GetBestTarget(pm, client, engine, localPlayer, spotted, baim, aimfov):
 
                     localpos.y = pm.read_float(localPlayer + m_vecOrigin + 4)
                     localpos.z = pm.read_float(localPlayer + m_vecOrigin + 8) + localAngle.z
-                    entity_bone = pm.read_int(entity + m_dwBoneMatrix)
+                    entity_bone = pm.read_uint(entity + m_dwBoneMatrix)
                     entitypos = Vec3(0,0,0)
                     if baim is True:
                         entitypos.x = pm.read_float(entity_bone + 0x30 * 5 + 0xC)

@@ -42,7 +42,7 @@ def GetForegroundWindow():
     return user32.GetForegroundWindow()
 def main():
     cham = False
-    engine_pointer = pm.read_int( engine + dwClientState )
+    engine_pointer = pm.read_uint( engine + dwClientState )
     oldpunch = Vec3(0,0,0)
     newrcs = Vec3( 0, 0, 0 )
     punch = Vec3( 0, 0, 0 )

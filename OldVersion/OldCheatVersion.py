@@ -466,8 +466,8 @@ class Ui_MainWindow( object ):
         pm = pymem.Pymem( "csgo.exe" )
         client = pymem.process.module_from_name( pm.process_handle, "client.dll" ).lpBaseOfDll
         engine = pymem.process.module_from_name( pm.process_handle, "engine.dll" ).lpBaseOfDll
-        player = pm.read_int( client + dwLocalPlayer )
-        engine_pointer = pm.read_int( engine + dwClientState )
+        player = pm.read_uint( client + dwLocalPlayer )
+        engine_pointer = pm.read_uint( engine + dwClientState )
         oldpunchx = 0.0
         oldpunchy = 0.0
         while True:
@@ -482,29 +482,29 @@ class Ui_MainWindow( object ):
             olddisty = 111111111111
             if client and engine and pm:
                 try:
-                    player = pm.read_int( client + dwLocalPlayer )
-                    engine_pointer = pm.read_int( engine + dwClientState )
-                    glow_manager = pm.read_int( client + dwGlowObjectManager )
-                    crosshairID = pm.read_int( player + m_iCrosshairId )
-                    getcrosshairTarget = pm.read_int( client + dwEntityList + (crosshairID - 1) * 0x10 )
-                    immunitygunganme = pm.read_int( getcrosshairTarget + m_bGunGameImmunity )
-                    localTeam = pm.read_int( player + m_iTeamNum )
-                    crosshairTeam = pm.read_int( getcrosshairTarget + m_iTeamNum )
+                    player = pm.read_uint( client + dwLocalPlayer )
+                    engine_pointer = pm.read_uint( engine + dwClientState )
+                    glow_manager = pm.read_uint( client + dwGlowObjectManager )
+                    crosshairID = pm.read_uint( player + m_iCrosshairId )
+                    getcrosshairTarget = pm.read_uint( client + dwEntityList + (crosshairID - 1) * 0x10 )
+                    immunitygunganme = pm.read_uint( getcrosshairTarget + m_bGunGameImmunity )
+                    localTeam = pm.read_uint( player + m_iTeamNum )
+                    crosshairTeam = pm.read_uint( getcrosshairTarget + m_iTeamNum )
                 except:
                     print( "Round not started yet" )
                     time.sleep( 5 )
                     continue
 
             for i in range( 1, 64 ):
-                entity = pm.read_int( client + dwEntityList + i * 0x10 )
+                entity = pm.read_uint( client + dwEntityList + i * 0x10 )
 
                 if entity:
                     try:
-                        entity_glow = pm.read_int( entity + m_iGlowIndex )
-                        entity_team_id = pm.read_int( entity + m_iTeamNum )
-                        entity_isdefusing = pm.read_int( entity + m_bIsDefusing )
-                        entity_hp = pm.read_int( entity + m_iHealth )
-                        entity_dormant = pm.read_int( entity + m_bDormant )
+                        entity_glow = pm.read_uint( entity + m_iGlowIndex )
+                        entity_team_id = pm.read_uint( entity + m_iTeamNum )
+                        entity_isdefusing = pm.read_uint( entity + m_bIsDefusing )
+                        entity_hp = pm.read_uint( entity + m_iHealth )
+                        entity_dormant = pm.read_uint( entity + m_bDormant )
                     except:
                         print( "Could not load Players Infos (Should only do this once)" )
                         time.sleep( 2 )
@@ -520,7 +520,7 @@ class Ui_MainWindow( object ):
                         r, g, b = 0, 255, 0
 
                     if self.aimc and localTeam != entity_team_id and entity_hp > 0:
-                        entity_bones = pm.read_int( entity + m_dwBoneMatrix )
+                        entity_bones = pm.read_uint( entity + m_dwBoneMatrix )
                         localpos_x_angles = pm.read_float( engine_pointer + dwClientState_ViewAngles )
                         localpos_y_angles = pm.read_float( engine_pointer + dwClientState_ViewAngles + 0x4 )
                         localpos1 = pm.read_float( player + m_vecOrigin )
@@ -555,14 +555,14 @@ class Ui_MainWindow( object ):
                             punchy = pm.read_float( player + m_aimPunchAngle + 0x4 )
                             if self.silentshit:
                                 pm.write_uchar( engine + dwbSendPackets, 0 )
-                                Commands = pm.read_int( client + dwInput + 0xF4 )
-                                VerifedCommands = pm.read_int( client + dwInput + 0xF8 )
-                                Desired = pm.read_int( engine_pointer + clientstate_last_outgoing_command ) + 2
+                                Commands = pm.read_uint( client + dwInput + 0xF4 )
+                                VerifedCommands = pm.read_uint( client + dwInput + 0xF8 )
+                                Desired = pm.read_uint( engine_pointer + clientstate_last_outgoing_command ) + 2
                                 OldUser = Commands + ((Desired - 1) % 150) * 100
                                 VerifedOldUser = VerifedCommands + ((Desired - 1) % 150) * 0x68
-                                m_buttons = pm.read_int( OldUser + 0x30 )
+                                m_buttons = pm.read_uint( OldUser + 0x30 )
                                 Net_Channel = pm.read_uint( engine_pointer + clientstate_net_channel )
-                                if pm.read_int( Net_Channel + 0x18 ) < Desired:
+                                if pm.read_uint( Net_Channel + 0x18 ) < Desired:
                                     pass
                                 elif self.aimrcs:
                                     pm.write_float( OldUser + 0x0C, normalize_x )
@@ -581,7 +581,7 @@ class Ui_MainWindow( object ):
                                     pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
                                     pm.write_uchar( engine + dwbSendPackets, 1 )
 
-                            elif self.aimrcs and pm.read_int( player + m_iShotsFired ) > 1:
+                            elif self.aimrcs and pm.read_uint( player + m_iShotsFired ) > 1:
                                 pm.write_float( engine_pointer + dwClientState_ViewAngles, normalize_x - (punchx * 2) )
                                 pm.write_float( engine_pointer + dwClientState_ViewAngles + 0x4,
                                                 normalize_y - (punchy * 2) )
@@ -626,7 +626,7 @@ class Ui_MainWindow( object ):
                     self.pm.write_float( flash_value, float( 0 ) )
 
             if self.rcse:
-                if pm.read_int( player + m_iShotsFired ) > 2:
+                if pm.read_uint( player + m_iShotsFired ) > 2:
                     rcs_x = pm.read_float( engine_pointer + dwClientState_ViewAngles )
                     rcs_y = pm.read_float( engine_pointer + dwClientState_ViewAngles + 0x4 )
                     punchx = pm.read_float( player + m_aimPunchAngle )
@@ -667,7 +667,7 @@ class Ui_MainWindow( object ):
             if self.bhc:
                 if is_press( "space" ):
                     force_jump = client + dwForceJump
-                    on_ground = pm.read_int( player + m_fFlags )
+                    on_ground = pm.read_uint( player + m_fFlags )
                     if player and on_ground == 257 or on_ground == 263:
                         pm.write_int( force_jump, 6 )
 
@@ -695,18 +695,18 @@ class Ui_MainWindow( object ):
                      "Supreme Master First Class",
                      "The Global Elite"]
         for i in range( 0, 32 ):
-            entity = pm.read_int( client.lpBaseOfDll + dwEntityList + i * 0x10 )
+            entity = pm.read_uint( client.lpBaseOfDll + dwEntityList + i * 0x10 )
 
             if entity:
-                entity_team_id = pm.read_int( entity + m_iTeamNum )
+                entity_team_id = pm.read_uint( entity + m_iTeamNum )
                 if entity_team_id :
-                    player_info = pm.read_int(
-                            (pm.read_int( engine.lpBaseOfDll + dwClientState )) + dwClientState_PlayerInfo )
-                    player_info_items = pm.read_int( pm.read_int( player_info + 0x40 ) + 0xC )
-                    info = pm.read_int( player_info_items + 0x28 + (i * 0x34) )
-                    playerres = pm.read_int( client.lpBaseOfDll + dwPlayerResource )
-                    rank = pm.read_int( playerres + m_iCompetitiveRanking + (i * 4 ))
-                    wins = pm.read_int(playerres + m_iCompetitiveWins + i * 4)
+                    player_info = pm.read_uint(
+                            (pm.read_uint( engine.lpBaseOfDll + dwClientState )) + dwClientState_PlayerInfo )
+                    player_info_items = pm.read_uint( pm.read_uint( player_info + 0x40 ) + 0xC )
+                    info = pm.read_uint( player_info_items + 0x28 + (i * 0x34) )
+                    playerres = pm.read_uint( client.lpBaseOfDll + dwPlayerResource )
+                    rank = pm.read_uint( playerres + m_iCompetitiveRanking + (i * 4 ))
+                    wins = pm.read_uint(playerres + m_iCompetitiveWins + i * 4)
                     if pm.read_string( info + 0x10 ) != 'GOTV':
                         print(rank)
                         print( pm.read_string( info + 0x10 ) + "   -->   " + ranks[rank] )

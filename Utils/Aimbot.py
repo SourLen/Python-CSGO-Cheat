@@ -11,8 +11,8 @@ def shootatTarget(pm, client, engine, localpos, targetpos, player, engine_pointe
     punchy = pm.read_float( player + m_aimPunchAngle + 0x4 )
     if Silent:
         pm.write_uchar( engine + dwbSendPackets, 0 )
-        Commands = pm.read_int( client + dwInput + 0xF4 )
-        VerifedCommands = pm.read_int( client + dwInput + 0xF8 )
+        Commands = pm.read_int( client + dwInput + 0x0108 )
+        VerifedCommands = pm.read_int( client + dwInput + 0x010C )
         Desired = pm.read_int( engine_pointer + clientstate_last_outgoing_command ) + 2
         OldUser = Commands + ((Desired - 1) % 150) * 100
         VerifedOldUser = VerifedCommands + ((Desired - 1) % 150) * 0x68

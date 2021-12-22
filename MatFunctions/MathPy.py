@@ -77,8 +77,8 @@ def CalcDistance(Current: Vec3, New: Vec3):
     return Mag
 
 def checkindex(pm, client, engine):
-    clientstate = pm.read_int(engine + dwClientState)
-    ID = pm.read_int(clientstate + dwClientState_GetLocalPlayer)
+    clientstate = pm.read_uint(engine + dwClientState)
+    ID = pm.read_uint(clientstate + dwClientState_GetLocalPlayer)
     return ID
 
 
@@ -91,14 +91,14 @@ def GetBestTarget(pm, client, engine, localPlayer, spotted, baim, aimfov):
         player_team = pm.read_int(localPlayer + m_iTeamNum)
         engine_pointer = pm.read_uint( engine + dwClientState )
         for i in range(1, 32):
-            entity = pm.read_int( client + dwEntityList + i * 0x10 )
+            entity = pm.read_uint( client + dwEntityList + i * 0x10 )
 
             if entity and entity != localPlayer:
-                entity_hp = pm.read_int(entity + m_iHealth)
-                entity_dormant =  pm.read_int(entity + m_bDormant)
-                entity_team = pm.read_int(entity + m_iTeamNum)
+                entity_hp = pm.read_uint(entity + m_iHealth)
+                entity_dormant =  pm.read_uint(entity + m_bDormant)
+                entity_team = pm.read_uint(entity + m_iTeamNum)
                 if spotted == True:
-                    Entspotted = pm.read_int(entity + m_bSpottedByMask)
+                    Entspotted = pm.read_uint(entity + m_bSpottedByMask)
                 else:
                     Entspotted = True
 

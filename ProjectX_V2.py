@@ -58,7 +58,7 @@ def main():
                 continue
 
             pm.write_uchar( engine + dwbSendPackets, 1 )
-            player = pm.read_int(client + dwLocalPlayer)
+            player = pm.read_uint(client + dwLocalPlayer)
 
             if client and engine and pm:
                 try:

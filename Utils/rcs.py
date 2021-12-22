@@ -4,7 +4,7 @@ from MatFunctions.MathPy import *
 
 def rcse(pm, player, engine_pointer,oldpunch, newrcs, punch, rcs):
 
-    if pm.read_int( player + m_iShotsFired ) > 2:
+    if pm.read_uint( player + m_iShotsFired ) > 2:
 
         rcs.x = pm.read_float( engine_pointer + dwClientState_ViewAngles )
 

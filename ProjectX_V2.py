@@ -1,15 +1,5 @@
-
 import pymem
 from nets.get_netvars import *
-try:
-    pm = pymem.Pymem("csgo.exe")
-except:
-    print("CSGO not open, closing cheat")
-    exit()
-
-gn = get_netvars(pm)
-print("DUMPING NETVARS")
-
 from Utils.Bhop import *
 from Utils.Aimbot import *
 from Utils.Autostrafe import *
@@ -20,36 +10,23 @@ from Utils.Chams import Chams, ResetChams
 import threading
 from Utils.WallhackFunctions import *
 from Classes.Ui1 import *
-
-client = pymem.process.module_from_name( pm.process_handle, "client.dll" ).lpBaseOfDll
-engine = pymem.process.module_from_name( pm.process_handle, "engine.dll" ).lpBaseOfDll
-user32 = ctypes.windll.user32
-print("DUMPING OFFSETS SUCCESFUL")
-def GetWindowText(handle, length=100):
-
-    window_text = ctypes.create_string_buffer(length)
-    user32.GetWindowTextA(
-        handle,
-        ctypes.byref(window_text),
-        length
-    )
-
-    return window_text.value
+from Utils.Utilities import *
 
 
-def GetForegroundWindow():
 
-    return user32.GetForegroundWindow()
 def main():
-    cham = False
+    try:
+        pm = pymem.Pymem("csgo.exe")
+    except:
+        print("CSGO not open, closing cheat")
+        exit()
+    gn = get_netvars(pm)
+
+    client = pymem.process.module_from_name(pm.process_handle, "client.dll").lpBaseOfDll
+    engine = pymem.process.module_from_name(pm.process_handle, "engine.dll").lpBaseOfDll
     engine_pointer = pm.read_uint( engine + dwClientState )
-    oldpunch = Vec3(0,0,0)
-    newrcs = Vec3( 0, 0, 0 )
-    punch = Vec3( 0, 0, 0 )
-    rcs = Vec3( 0, 0, 0 )
-    fovex = False
-    First = True
-    oldviewangle = 0.0
+    print("DUMPING NETVARS")
+    print("DUMPING OFFSETS SUCCESFUL")
     print("CHEAT STARTED")
     while True:
         try:
@@ -139,6 +116,8 @@ def main():
 
         except:
             continue
+
+
 
 if __name__ == "__main__":
     import sys

@@ -38,12 +38,12 @@ def SetEntityGlow(pm, entity_hp, entity_team_id, entity_dormant, localTeam, glow
 def GetEntityVars(pm, entity):
     while True:
         try:
-            entity_glow = pm.read_int( entity + m_iGlowIndex )
+            entity_glow = pm.read_uint( entity + m_iGlowIndex )
 
-            entity_team_id = pm.read_int( entity + m_iTeamNum )
-            entity_isdefusing = pm.read_int( entity + m_bIsDefusing )
-            entity_hp = pm.read_int( entity + m_iHealth )
-            entity_dormant = pm.read_int( entity + m_bDormant )
+            entity_team_id = pm.read_uint( entity + m_iTeamNum )
+            entity_isdefusing = pm.read_uint( entity + m_bIsDefusing )
+            entity_hp = pm.read_uint( entity + m_iHealth )
+            entity_dormant = pm.read_uint( entity + m_bDormant )
         except:
             print( "Could not load Players Infos (Should only do this once)" )
             time.sleep( 0.2 )

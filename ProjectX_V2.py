@@ -15,16 +15,24 @@ from Utils.Utilities import *
 
 
 def main():
+
     try:
         pm = pymem.Pymem("csgo.exe")
     except:
         print("CSGO not open, closing cheat")
         exit()
     gn = get_netvars(pm)
-
     client = pymem.process.module_from_name(pm.process_handle, "client.dll").lpBaseOfDll
     engine = pymem.process.module_from_name(pm.process_handle, "engine.dll").lpBaseOfDll
     engine_pointer = pm.read_uint( engine + dwClientState )
+    cham = False
+    oldpunch = Vec3(0, 0, 0)
+    newrcs = Vec3(0, 0, 0)
+    punch = Vec3(0, 0, 0)
+    rcs = Vec3(0, 0, 0)
+    fovex = False
+    First = True
+    oldviewangle = 0.0
     print("DUMPING NETVARS")
     print("DUMPING OFFSETS SUCCESFUL")
     print("CHEAT STARTED")
@@ -51,19 +59,14 @@ def main():
 
             if ui.Trigger:
                 shootTrigger(pm, crosshairID, client, localTeam, crosshairTeam, ui.Triggerkey)
-
-
             if ui.Noflash:
                 flash_value = player + m_flFlashMaxAlpha
                 if flash_value:
                     pm.write_float( flash_value, float( 0 ) )
-
             if ui.RCS:
-
                 oldpunch = rcse(pm,player,engine_pointer,oldpunch, newrcs, punch, rcs)
 
             if not ui.Holdfov:
-
                 if ui.Togglefov and fovex:
                     fovshit = player + m_iDefaultFOV
                     pm.write_int( fovshit, ui.Fovvaluke )
@@ -114,12 +117,13 @@ def main():
                 cham = False
                 First = True
 
-        except:
+        except Exception as e:
             continue
 
 
 
 if __name__ == "__main__":
+    update()
     import sys
     app = QtWidgets.QApplication( sys.argv )
     Dialog = QtWidgets.QMainWindow()
@@ -127,7 +131,6 @@ if __name__ == "__main__":
     ui.setupUi( Dialog )
     Dialog.show()
     threading.Thread(target=main).start()
-
     sys.exit( app.exec_() )
 
 

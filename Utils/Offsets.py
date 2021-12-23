@@ -1,4 +1,4 @@
-import json, pymem, re
+import json, pymem, re, requests
 file = "./nets/netvars.json"
 f = open(file, "r")
 
@@ -42,6 +42,23 @@ def get_sig( pm, modulename, pattern, extra=0, offset=0,
     yes_relative = pm.read_int( module.lpBaseOfDll + match + offset ) + extra - module.lpBaseOfDll
     return "0x{:X}".format( yes_relative ) if relative else "0x{:X}".format( non_relative )
 
+def transform_patterns():#unfinished
+    PatternDict = {}
+    response = requests.get("https://raw.githubusercontent.com/frk1/hazedumper/master/config.json").json()
+    for struct in response["signatures"]:
+        old = str(struct["pattern"])
+        new = old.replace("?", ".")
+        new = new.split(" ")
+        newone = []
+        for element in new:
+            if element != ".":
+                element = r"\x"+ element
+            newone.append(element)
+            print(newone)
+
+
+
+#transform_patterns()#not ready yet
 pm1 = pymem.Pymem("csgo.exe")
 dwLocalPlayer = get_sig( pm1, "client.dll",
                          rb'\x8D\x34\x85....\x89\x15....\x8B\x41\x08\x8B\x48\x04\x83\xF9\xFF', 4, 3 )

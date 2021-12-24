@@ -41,70 +41,72 @@ def get_sig( pm, modulename, pattern, extra=0, offset=0,
     non_relative = pm.read_int( module.lpBaseOfDll + match + offset ) + extra
     yes_relative = pm.read_int( module.lpBaseOfDll + match + offset ) + extra - module.lpBaseOfDll
     return "0x{:X}".format( yes_relative ) if relative else "0x{:X}".format( non_relative )
-
+PatternDict = {}
 def transform_patterns():#unfinished
-    PatternDict = {}
+
     response = requests.get("https://raw.githubusercontent.com/frk1/hazedumper/master/config.json").json()
     for struct in response["signatures"]:
         old = str(struct["pattern"])
         new = old.replace("?", ".")
         new = new.split(" ")
-        newone = []
+        newone = ""
         for element in new:
             if element != ".":
-                element = r"\x"+ element
-            newone.append(element)
-            print(newone)
+                element = r'\x'+element
+            newone = newone + element
+        PatternDict[struct["name"]] = newone
 
 
 
-#transform_patterns()#not ready yet
+
+transform_patterns()#not ready yet
+
 pm1 = pymem.Pymem("csgo.exe")
 dwLocalPlayer = get_sig( pm1, "client.dll",
-                         rb'\x8D\x34\x85....\x89\x15....\x8B\x41\x08\x8B\x48\x04\x83\xF9\xFF', 4, 3 )
+                         bytes(PatternDict["dwLocalPlayer"], encoding="raw_unicode_escape"), 4, 3 )
 dwLocalPlayer = int( dwLocalPlayer, 0 )
-dwEntityList = get_sig( pm1, "client.dll", rb"\xBB....\x83\xFF\x01\x0F\x8C....\x3B\xF8", 0, 1 )
+dwEntityList = get_sig( pm1, "client.dll",bytes(PatternDict["dwEntityList"], encoding="raw_unicode_escape"), 0, 1 )
 dwEntityList = int( dwEntityList, 0 )
-dwGlowObjectManager = get_sig( pm1, "client.dll", rb"\xA1....\xA8\x01\x75\x4B", 4, 1 )
+dwGlowObjectManager = get_sig( pm1, "client.dll", bytes(PatternDict["dwGlowObjectManager"], encoding="raw_unicode_escape"), 4, 1 )
 dwGlowObjectManager = int( dwGlowObjectManager, 0 )
-dwForceJump = get_sig( pm1, "client.dll", rb"\x8B\x0D....\x8B\xD6\x8B\xC1\x83\xCA\x02", 0, 2 )
+dwForceJump = get_sig( pm1, "client.dll", bytes(PatternDict["dwForceJump"], encoding="raw_unicode_escape"), 0, 2 )
 dwForceJump = int( dwForceJump, 0 )
-dwForceAttack = get_sig( pm1, "client.dll", rb"\x89\x0D....\x8B\x0D....\x8B\xF2\x8B\xC1\x83\xCE\x04", 0, 2 )
+dwForceAttack = get_sig( pm1, "client.dll", bytes(PatternDict["dwForceAttack"], encoding="raw_unicode_escape"), 0, 2 )
 dwForceAttack = int( dwForceAttack, 0 )
-dwClientState = get_sig( pm1, "engine.dll", rb"\xA1....\x33\xD2\x6A\x00\x6A\x00\x33\xC9\x89\xB0", 0, 1 )
+dwClientState = get_sig( pm1, "engine.dll", bytes(PatternDict["dwClientState"], encoding="raw_unicode_escape"), 0, 1 )
 dwClientState = int( dwClientState, 0 )
-dwViewMatrix = get_sig( pm1, "client.dll", rb"\x0F\x10\x05....\x8D\x85....\xB9", 176, 3 )
+dwViewMatrix = get_sig( pm1, "client.dll", bytes(PatternDict["dwViewMatrix"], encoding="raw_unicode_escape"), 176, 3 )
 dwViewMatrix = int( dwViewMatrix, 0 )
 
 #dwClientState_ViewAngles = get_sig(pm1, "engine.dll", rb"\xF3\x0F\x11\x86....\xF3\x0F\x10\x44\x24\.\xF3\x0F\x11\x86", 0, 4, False)
 #print(dwClientState_ViewAngles)
 dwClientState_ViewAngles = 19856
 dwbSendPackets = get_sig( pm1, "engine.dll",
-                          rb"\xB3\x01\x8B\x01\x8B\x40\x10\xFF\xD0\x84\xC0\x74\x0F\x80\xBF.....\x0F\x84",
+                          bytes(PatternDict["dwbSendPackets"], encoding="raw_unicode_escape"),
                           1)
 
-dwInput = get_sig( pm1, "client.dll", rb"\xB9....\xF3\x0F\x11\x04\x24\xFF\x50\x10", 0, 1 )
+dwInput = get_sig( pm1, "client.dll",bytes(PatternDict["dwInput"], encoding="raw_unicode_escape"), 0, 1 )
 dwInput = int( dwInput, 0 )
-clientstate_net_channel = get_sig( pm1, "engine.dll", rb"\x8B\x8F....\x8B\x01\x8B\x40\x18", 0, 2, False )
+clientstate_net_channel = get_sig( pm1, "engine.dll", bytes(PatternDict["clientstate_net_channel"], encoding="raw_unicode_escape"), 0, 2, False )
 clientstate_net_channel = int( clientstate_net_channel, 0 )
-clientstate_last_outgoing_command = get_sig( pm1, "engine.dll", rb"\x8B\x8F....\x8B\x87....\x41", 0, 2,
+clientstate_last_outgoing_command = get_sig( pm1, "engine.dll", bytes(PatternDict["clientstate_last_outgoing_command"], encoding="raw_unicode_escape"), 0, 2,
                                               False )
 clientstate_last_outgoing_command = int( clientstate_last_outgoing_command, 0 )
-m_bDormant = get_sig( pm1, "client.dll", rb"\x8A\x81....\xC3\x32\xC0", 8, 2, False )
+m_bDormant = get_sig( pm1, "client.dll", bytes(PatternDict["m_bDormant"], encoding="raw_unicode_escape"), 8, 2, False )
 m_bDormant = int( m_bDormant, 0 )
-dwClientState_PlayerInfo = get_sig( pm1, "engine.dll", rb"\x8B\x89....\x85\xC9\x0F\x84....\x8B\x01", 0, 2,
+dwClientState_PlayerInfo = get_sig( pm1, "engine.dll", bytes(PatternDict["dwClientState_PlayerInfo"], encoding="raw_unicode_escape"), 0, 2,
                                          False )
 dwClientState_PlayerInfo = int( dwClientState_PlayerInfo, 0 )
-dwPlayerResource = get_sig( pm1, "client.dll", rb"\x8B\x3D....\x85\xFF\x0F\x84....\x81\xC7", 0, 2 )
+dwPlayerResource = get_sig( pm1, "client.dll", bytes(PatternDict["dwPlayerResource"], encoding="raw_unicode_escape"), 0, 2 )
 dwPlayerResource = int( dwPlayerResource, 0 )
-dwClientState_GetLocalPlayer = get_sig( pm1, "engine.dll", rb"\x8B\x80....\x40\xC3", 0, 2, False )
+dwClientState_GetLocalPlayer = get_sig( pm1, "engine.dll", bytes(PatternDict["dwClientState_GetLocalPlayer"], encoding="raw_unicode_escape"), 0, 2, False )
 dwClientState_GetLocalPlayer = int( dwClientState_GetLocalPlayer, 0 )
-dwForceLeft = get_sig( pm1, "client.dll", rb"\x55\x8B\xEC\x51\x53\x8A\x5D\x08", 0, 465 )
+dwForceLeft = get_sig( pm1, "client.dll", bytes(PatternDict["dwForceLeft"], encoding="raw_unicode_escape"), 0, 465 )
 dwForceLeft = int( dwForceLeft, 0 )
-dwForceRight = get_sig( pm1, "client.dll", rb"\x55\x8B\xEC\x51\x53\x8A\x5D\x08", 0, 512 )
+dwForceRight = get_sig( pm1, "client.dll", bytes(PatternDict["dwForceRight"], encoding="raw_unicode_escape"), 0, 512 )
 dwForceRight = int( dwForceRight, 0 )
 
-model_ambient = get_sig(pm1, "engine.dll", rb"\xF3\x0F\x10\x0D....\xF3\x0F\x11\x4C\x24.\x8B\x44\x24\x20\x35....\x89\x44\x24\x0C", 0, 4)
+model_ambient = get_sig(pm1, "engine.dll", bytes(PatternDict["model_ambient_min"], encoding="raw_unicode_escape"), 0, 4)
 model_ambient = int(model_ambient, 0)
 
 pm1.close_process()

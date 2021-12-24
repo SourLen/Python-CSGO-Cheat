@@ -123,7 +123,7 @@ def main():
 
 
 if __name__ == "__main__":
-
+    update()
     import sys
     app = QtWidgets.QApplication( sys.argv )
     Dialog = QtWidgets.QMainWindow()

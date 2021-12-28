@@ -65,8 +65,9 @@ pm1 = pymem.Pymem("csgo.exe")
 dwLocalPlayer = get_sig( pm1, "client.dll",
                          bytes(PatternDict["dwLocalPlayer"], encoding="raw_unicode_escape"), 4, 3 )
 dwLocalPlayer = int( dwLocalPlayer, 0 )
-dwEntityList = get_sig( pm1, "client.dll",bytes(PatternDict["dwEntityList"], encoding="raw_unicode_escape"), 0, 1 )
-dwEntityList = int( dwEntityList, 0 )
+#dwEntityList = get_sig( pm1, "client.dll",bytes(PatternDict["dwEntityList"], encoding="raw_unicode_escape"), 0, 1 )
+#dwEntityList = int( dwEntityList, 0 )
+dwEntityList = 81647132
 dwGlowObjectManager = get_sig( pm1, "client.dll", bytes(PatternDict["dwGlowObjectManager"], encoding="raw_unicode_escape"), 4, 1 )
 dwGlowObjectManager = int( dwGlowObjectManager, 0 )
 dwForceJump = get_sig( pm1, "client.dll", bytes(PatternDict["dwForceJump"], encoding="raw_unicode_escape"), 0, 2 )

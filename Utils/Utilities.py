@@ -1,5 +1,5 @@
 import ctypes, requests, warnings
-versioncontrol = "1.0"
+versioncontrol = "1.1"
 
 
 def GetWindowText(handle, length=100):

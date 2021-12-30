@@ -24,7 +24,7 @@ def GetForegroundWindow():
 def update():
     gn = get_netvars(pymem.Pymem("csgo.exe"))
     raw = requests.get("https://raw.githubusercontent.com/XanOpiat/Python-CSGO-Cheat/main/Utils/Utilities.py").text
-    vc = raw.splitlines()[1].split("=")[-1][2:-1]
+    vc = raw.splitlines()[3].split("=")[-1][2:-1]
     if vc == versioncontrol:
         print("Cheat up to date")
         return True

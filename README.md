@@ -9,11 +9,15 @@ Video Tutorial: https://youtu.be/eaP6Hr_uzSs
 
 ## Features
 -Aimbot (Body or head) \
+-Smooth Aimbot \
+-Random Aimbot\
+-Legitbot \
+-Config System using Configparser \
 -Silentaim \
 -RCS \
 -RCS with Aimbot \
 -Triggerbot \
--Wallhack \
+-Customizable Wallhack \
 -Noflash \
 -Radar \
 -Bunnyhop \

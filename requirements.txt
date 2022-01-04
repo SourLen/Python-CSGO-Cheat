@@ -4,4 +4,4 @@ PyQt5
 threaded
 requests
 mouse
-gitpython
+

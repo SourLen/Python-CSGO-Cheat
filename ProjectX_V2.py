@@ -1,17 +1,22 @@
-import threading, time, git, shutil
+import io
+import shutil
+import threading
+import time
+import zipfile
 from random import randint
-from Classes.Vector3 import Vec3
-from Utils.Bhop import Bhop
-from Utils.Aimbot import shootatTarget, sens, AimStep
-from Utils.Autostrafe import AutoStrafe
-from Utils.Triggerbot import shootTrigger
-from Utils.rcs import rcse
-from Utils.Chams import Chams, ResetChams
-from Utils.WallhackFunctions import SetEntityGlow, GetEntityVars
-from Utils.Utilities import GetWindowText, GetForegroundWindow, update
-from Classes.Ui import *
+
 from Classes.PlayerVars import *
+from Classes.Ui import *
+from Classes.Vector3 import Vec3
 from MatFunctions.MathPy import GetBestTarget, CalcAngle, CalcDistance
+from Utils.Aimbot import shootatTarget, AimStep
+from Utils.Autostrafe import AutoStrafe
+from Utils.Bhop import Bhop
+from Utils.Chams import Chams, ResetChams
+from Utils.Triggerbot import shootTrigger
+from Utils.Utilities import GetWindowText, GetForegroundWindow, update
+from Utils.WallhackFunctions import SetEntityGlow, GetEntityVars
+from Utils.rcs import rcse
 
 
 def main():
@@ -180,4 +185,6 @@ if __name__ == "__main__":
                     shutil.rmtree(filepath, ignore_errors=True)
             except Exception as e:
                 print('Failed to delete %s. Reason: %s' % (filepath, e))
-        git.Git(stringdir).clone("https://github.com/XanOpiat/Python-CSGO-Cheat.git")
+        r = requests.get("https://github.com/XanOpiat/Python-CSGO-Cheat/archive/refs/heads/main.zip", stream=True)
+        z = zipfile.ZipFile(io.BytesIO(r.content))
+        z.extractall(stringdir)

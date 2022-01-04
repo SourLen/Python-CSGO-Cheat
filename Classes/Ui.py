@@ -1,7 +1,8 @@
 import ctypes, keyboard, configparser, os.path
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Utils.Utilities import strtobool
-
+import string
+import random
 
 class Ui_MainWindow(object):
     def __init__(self):
@@ -622,7 +623,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "ProjectX"))
+        processName = ''.join(random.choices(string.ascii_uppercase + string.digits, k = random.randint(4, 10)))
+        MainWindow.setWindowTitle(_translate("MainWindow", processName))
         self.checkBox.setText(_translate("MainWindow", "GLOW"))
         self.checkBox_2.setText(_translate("MainWindow", "CHAMS"))
         self.checkBox_3.setText(_translate("MainWindow", "NOFLASH"))

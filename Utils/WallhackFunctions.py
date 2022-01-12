@@ -1,6 +1,10 @@
 from Utils.Offsets import *
 import time
 
+# Cleaned most of this file,
+# This file is working.
+# Last update 2022,Jan,10
+
 
 def SetEntityGlow(pm, entity_hp, entity_team_id, entity_dormant, localTeam, glow_manager, entity_glow, eteam, health, color):
     if health:
@@ -43,7 +47,7 @@ def GetEntityVars(pm, entity):
             entity_isdefusing = pm.read_uint(entity + m_bIsDefusing)
             entity_hp = pm.read_uint(entity + m_iHealth)
             entity_dormant = pm.read_uint(entity + m_bDormant)
-        except:
+        except Exception as e:
             print("Could not load Players Infos (Should only do this once)")
             time.sleep(0.2)
             continue

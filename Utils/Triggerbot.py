@@ -1,6 +1,10 @@
 import keyboard
 from Utils.Offsets import *
 
+# Cleaned all of this file,
+# This file is working.
+# Last update 2022,Jan,10
+
 
 def shootTrigger(pm, CrossID, client, lTeam, CTeam, triggerkey):
     if keyboard.is_pressed(triggerkey) and 0 < CrossID < 64 and lTeam != CTeam:

@@ -1,4 +1,12 @@
-import json, pymem, re, requests
+import json
+import pymem
+import re
+import requests
+
+# Cleaned most of this file,
+# This file is working.
+# Last update 2022,Jan,10
+
 
 file = "./nets/netvars.json"
 f = open(file, "r")
@@ -64,14 +72,12 @@ def transform_patterns():  # unfinished
 transform_patterns()  # not ready yet
 
 pm1 = pymem.Pymem("csgo.exe")
-dwLocalPlayer = get_sig(pm1, "client.dll",
-                        bytes(PatternDict["dwLocalPlayer"], encoding="raw_unicode_escape"), 4, 3)
+dwLocalPlayer = get_sig(pm1, "client.dll", bytes(PatternDict["dwLocalPlayer"], encoding="raw_unicode_escape"), 4, 3)
 dwLocalPlayer = int(dwLocalPlayer, 0)
-#dwEntityList = get_sig( pm1, "client.dll",bytes(PatternDict["dwEntityList"], encoding="raw_unicode_escape"), 0, 1 )
-#dwEntityList = int( dwEntityList, 0 )
+# dwEntityList = get_sig( pm1, "client.dll",bytes(PatternDict["dwEntityList"], encoding="raw_unicode_escape"), 0, 1 )
+# dwEntityList = int( dwEntityList, 0 )
 dwEntityList = 81595060
-dwGlowObjectManager = get_sig(pm1, "client.dll",
-                              bytes(PatternDict["dwGlowObjectManager"], encoding="raw_unicode_escape"), 4, 1)
+dwGlowObjectManager = get_sig(pm1, "client.dll", bytes(PatternDict["dwGlowObjectManager"], encoding="raw_unicode_escape"), 4, 1)
 dwGlowObjectManager = int(dwGlowObjectManager, 0)
 dwForceJump = get_sig(pm1, "client.dll", bytes(PatternDict["dwForceJump"], encoding="raw_unicode_escape"), 0, 2)
 dwForceJump = int(dwForceJump, 0)
@@ -82,32 +88,25 @@ dwClientState = int(dwClientState, 0)
 dwViewMatrix = get_sig(pm1, "client.dll", bytes(PatternDict["dwViewMatrix"], encoding="raw_unicode_escape"), 176, 3)
 dwViewMatrix = int(dwViewMatrix, 0)
 
-dwClientState_ViewAngles = int(get_sig(pm1, "engine.dll", bytes(PatternDict["dwClientState_ViewAngles"], encoding="raw_unicode_escape"), 0, 4, False),0)
-dwbSendPackets = get_sig(pm1, "engine.dll",
-                         bytes(PatternDict["dwbSendPackets"], encoding="raw_unicode_escape"),
-                         1)
+dwClientState_ViewAngles = int(get_sig(pm1, "engine.dll", bytes(PatternDict["dwClientState_ViewAngles"], encoding="raw_unicode_escape"), 0, 4, False), 0)
+dwbSendPackets = get_sig(pm1, "engine.dll", bytes(PatternDict["dwbSendPackets"], encoding="raw_unicode_escape"), 1)
 
 dwInput = get_sig(pm1, "client.dll", bytes(PatternDict["dwInput"], encoding="raw_unicode_escape"), 0, 1)
 dwInput = int(dwInput, 0)
-clientstate_net_channel = get_sig(pm1, "engine.dll",
-                                  bytes(PatternDict["clientstate_net_channel"], encoding="raw_unicode_escape"), 0, 2,
-                                  False)
+
+clientstate_net_channel = get_sig(pm1, "engine.dll", bytes(PatternDict["clientstate_net_channel"], encoding="raw_unicode_escape"), 0, 2, False)
 clientstate_net_channel = int(clientstate_net_channel, 0)
-clientstate_last_outgoing_command = get_sig(pm1, "engine.dll", bytes(PatternDict["clientstate_last_outgoing_command"],
-                                                                     encoding="raw_unicode_escape"), 0, 2,
-                                            False)
+clientstate_last_outgoing_command = get_sig(pm1, "engine.dll", bytes(PatternDict["clientstate_last_outgoing_command"], encoding="raw_unicode_escape"), 0, 2, False)
 clientstate_last_outgoing_command = int(clientstate_last_outgoing_command, 0)
+
 m_bDormant = get_sig(pm1, "client.dll", bytes(PatternDict["m_bDormant"], encoding="raw_unicode_escape"), 8, 2, False)
 m_bDormant = int(m_bDormant, 0)
-dwClientState_PlayerInfo = get_sig(pm1, "engine.dll",
-                                   bytes(PatternDict["dwClientState_PlayerInfo"], encoding="raw_unicode_escape"), 0, 2,
-                                   False)
+
+dwClientState_PlayerInfo = get_sig(pm1, "engine.dll", bytes(PatternDict["dwClientState_PlayerInfo"], encoding="raw_unicode_escape"), 0, 2, False)
 dwClientState_PlayerInfo = int(dwClientState_PlayerInfo, 0)
-dwPlayerResource = get_sig(pm1, "client.dll", bytes(PatternDict["dwPlayerResource"], encoding="raw_unicode_escape"), 0,
-                           2)
+dwPlayerResource = get_sig(pm1, "client.dll", bytes(PatternDict["dwPlayerResource"], encoding="raw_unicode_escape"), 0, 2)
 dwPlayerResource = int(dwPlayerResource, 0)
-dwClientState_GetLocalPlayer = get_sig(pm1, "engine.dll", bytes(PatternDict["dwClientState_GetLocalPlayer"],
-                                                                encoding="raw_unicode_escape"), 0, 2, False)
+dwClientState_GetLocalPlayer = get_sig(pm1, "engine.dll", bytes(PatternDict["dwClientState_GetLocalPlayer"], encoding="raw_unicode_escape"), 0, 2, False)
 dwClientState_GetLocalPlayer = int(dwClientState_GetLocalPlayer, 0)
 dwForceLeft = get_sig(pm1, "client.dll", bytes(PatternDict["dwForceLeft"], encoding="raw_unicode_escape"), 0, 465)
 dwForceLeft = int(dwForceLeft, 0)

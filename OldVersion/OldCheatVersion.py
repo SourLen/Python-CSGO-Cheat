@@ -9,6 +9,9 @@ from math import *
 import ctypes
 import random
 
+# Im not going to clean this file, and leave it as is.
+
+
 offsets = 'https://raw.githubusercontent.com/XanOpiat/Python-CSGO-Cheat/main/offsets/offsets.json'
 response = requests.get( offsets ).json()
 bhop_taste = "space"

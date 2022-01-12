@@ -1,6 +1,10 @@
 from Utils.Offsets import *
 from MatFunctions.MathPy import *
 
+# Cleaned most of this file,
+# This file is working.
+# Last update 2022,Jan,10
+
 
 def rcse(pm, player, engine_pointer, oldpunch, newrcs, punch, rcs):
     if pm.read_uint(player + m_iShotsFired) > 2:

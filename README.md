@@ -5,7 +5,7 @@ Dont use silentaim with a high fov, its way to obvious and you are gonna get ban
 I have only tested this cheat against bots and you shouldnt use it against real people. This is ONLY MEANT AS A POC!
 It comes with a nice Gui and can be installed very easily.
 Requires Python3 and pip (aswell as CSGO obviously)                                             
-Video Tutorial: https://youtu.be/eaP6Hr_uzSs
+Video Tutorial: https://youtu.be/eaP6Hr_uzSs - Outdated for v2!
 
 ## Features
 -Aimbot (Body or head) \
@@ -26,45 +26,48 @@ Video Tutorial: https://youtu.be/eaP6Hr_uzSs
 -Auto-updating offsets \
 -Chams 
 
-
-
 ## Getting Started:
 
 Step 1:
 ```
-Download Zip File or git clone the repository and unpack the files if needed.
+Install Python3.8+ from https://python.org/downloads
 ```
 
 Step 2:
 ```
-If you are installing the cheat for the first installing:
-  1. Open a cmd as administrator
-  2. Cd into the directory of the cheat
-  3. use "pip install -r requirements.txt" to install the required libraries
- ```
+Download the ZIP from the github.
+```
  
 Step 3:
 ```
-Open CSGO and start a match
+Unpack the ZIP.
 ```
 
 Step 4:
 ```
-Run the ProjectX_V2.py file from the cmd (preferably as an administrator)
+Run installer.py (preferably as administrator).
 ```
 
 Step 5:
 ```
-Select your desired settings and click "UPDATE"
+Run CSGO (Get in a match).
 ```
+
 Step 6:
 ```
-It is recommended to change the antivac variable every once in a while to change the hash of the file
+Run ProjectX_V2.py (preferably as administrator).
+```
+
+Step 7:
+```
+Choose your setting and than, click the update botton,
+Have fun and star the github!
 ```
 
 ## Notes
-The cheat has its flaws and sometimes crashes but most of the times problems can be fixed with a restart.
-I will update the offsets as soon as i can but sometimes it needs some time.
+ProjectX_V2 Has some flaws, sometimes it will crash.
+Restarting the program should work, If not open a issue with the error.
+
 
 ## Credit To: 
 https://github.com/Snaacky/ for his csgo cheats which i used to learn about CSGO cheating in python. \

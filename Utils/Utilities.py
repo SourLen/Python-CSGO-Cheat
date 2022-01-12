@@ -1,5 +1,12 @@
-import ctypes, requests, warnings, pymem
+import ctypes
+import requests
+import pymem
 from nets.get_netvars import *
+
+# Cleaned all of this file,
+# This file is working.
+# Last update 2022,Jan,10
+
 
 versioncontrol = "2.0"
 
@@ -29,7 +36,7 @@ def update():
         print("Cheat up to date")
         return True
     else:
-        response = ctypes.windll.user32.MessageBoxW(0,"Do you want to download the latest version now?", "Cheat not updated", 0x00000004)
+        response = ctypes.windll.user32.MessageBoxW(0, "Do you want to download the latest version now?", "Cheat not updated", 0x00000004)
         if response == 6:
             return False
         elif response == 7:

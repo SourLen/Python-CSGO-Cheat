@@ -1,6 +1,13 @@
-import ctypes, keyboard, configparser, os.path
+import ctypes
+import keyboard
+import configparser
+import os.path
 from PyQt5 import QtCore, QtGui, QtWidgets
 from Utils.Utilities import strtobool
+
+# Cleaned most of this file,
+# This file is working.
+# Last update 2022,Jan,10
 
 
 class Ui_MainWindow(object):
@@ -211,7 +218,7 @@ class Ui_MainWindow(object):
                 print(e)
                 pass
         else:
-            ctypes.windll.user32.MessageBoxW(0,"Create a new config file first", "This file doesnt exist", 1)
+            ctypes.windll.user32.MessageBoxW(0, "Create a new config file first", "This file doesnt exist", 1)
 
     def update(self):
         update = True

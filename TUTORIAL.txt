@@ -1,9 +1,8 @@
-1. Install Python with Pip
-2. Open csgo
-3. Open cmd as administrator
-4. Copy the following command into your cmd(one at a time):
-	cd "your path to this file"
-	pip install -r requirements.txt
-	python ProjectX.py
-5. Select the features you want to use and click "Update"
-6. Enjoy
+1. Install Python3.8 from https://python.org/downloads
+2. Download the ZIP from the github.
+3. Unpack the ZIP.
+4. Run installer.py (preferably as administrator).
+5. Run CSGO // Get in a match
+6. Run ProjectX_V2.py (preferably as administrator).
+7. Choose your setting and than, click the update botton!
+8. Have fun and star the github!

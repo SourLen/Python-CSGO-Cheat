@@ -1,8 +1,6 @@
-import re
-import sys
-import json
-from typing import Union
-from pymem.process import module_from_name
+# Cleaned most of this file,
+# This file is working.
+# Last update 2022,Jan,10
 
 __all__ = ['RecvTable', 'RecvProp', 'ClientClass']
 

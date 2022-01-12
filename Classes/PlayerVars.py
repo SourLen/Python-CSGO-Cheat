@@ -14,3 +14,7 @@ def GetPlayerVars(pm, client, engine, engine_pointer):
 
     return player, engine_pointer, glow_manager, crosshairid, getcrosshairtarget, immunitygunganme, localteam, \
         crosshairteam, y_angle
+
+# Cleaned most of this file,
+# This file is now working.
+# Last update 2022,Jan,10

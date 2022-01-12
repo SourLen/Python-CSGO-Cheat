@@ -23,9 +23,10 @@ def main():
     # getting handle to csgo process
     try:
         pm = pymem.Pymem("csgo.exe")
-    except:
-        print("CSGO not open, closing cheat")
-        exit()
+    except Exception as e:
+        MessageBox = ctypes.windll.user32.MessageBoxW
+        MessageBox(None, 'Could not find the csgo.exe process !', 'Error', 16)  
+        quit(0)
     # getting client and engine dll modules as well as updating netvars
     client = pymem.process.module_from_name(pm.process_handle, "client.dll").lpBaseOfDll
     engine = pymem.process.module_from_name(pm.process_handle, "engine.dll").lpBaseOfDll
@@ -57,9 +58,8 @@ def main():
             if client and engine and pm:
                 try:  # Getting variables
                     player, engine_pointer, glow_manager, crosshairid, getcrosshairTarget, immunitygunganme,\
-                    localTeam, crosshairTeam, y_angle = GetPlayerVars(
-                        pm, client, engine, engine_pointer)
-                except:
+                    localTeam, crosshairTeam, y_angle = GetPlayerVars(pm, client, engine, engine_pointer)
+                except Exception as e:
                     print("Round not started yet")
                     time.sleep(2)
                     continue
@@ -118,36 +118,36 @@ def main():
                     fovex = not fovex
                     time.sleep(0.25)
 
-            if ui.Holdfov:  # Holdfov
+            if ui.Holdfov: # Holdfov
                 fovshit = player + m_iDefaultFOV
                 if keyboard.is_pressed(ui.Fovkey):
                     pm.write_int(fovshit, ui.Fovvaluke)
                 else:
                     pm.write_int(fovshit, 90)
 
-            if ui.Bhop:  # Bhop
+            if ui.Bhop: # Bhop
                 if keyboard.is_pressed("space"):
                     Bhop(pm, client, player)
 
-            if ui.auto_strafe and y_angle:  # Autostrafe
+            if ui.auto_strafe and y_angle: # Autostrafe
                 y_angle = AutoStrafe(pm, client, player, y_angle, oldviewangle)
                 oldviewangle = y_angle
 
-            for i in range(0, 64):  # looping through all entities
+            for i in range(0, 64): # Looping through all entities
                 entity = pm.read_uint(client + dwEntityList + i * 0x10)
                 if entity:
                     entity_glow, entity_team_id, entity_isdefusing, entity_hp, entity_dormant = GetEntityVars(pm,
                                                                                                               entity)
-                    if ui.Wallhack:  # Wallhack
+                    if ui.Wallhack: #  Wallhack
                         SetEntityGlow(pm, entity_hp, entity_team_id, entity_dormant, localTeam, glow_manager,
                                       entity_glow, ui.Eteam, ui.healthbasedWH, ui.WRGB)
-                    if ui.Radar:  # Radar
+                    if ui.Radar: #  Radar
                         pm.write_int(entity + m_bSpotted, 1)
-                    if ui.Chams:  # Chams
+                    if ui.Chams: #  Chams
                         Chams(pm, engine, entity, ui.Healthbased, ui.Ergb, ui.Argb, ui.Allies, ui.Enemies,
                               entity_team_id, entity_hp, First, player)
                         First = False
-                    if not ui.Chams and cham:  # Reseting Chams
+                    if not ui.Chams and cham: #  Reseting Chams
                         ResetChams(pm, engine, entity, entity_team_id, player)
             # Chams variables
             if ui.Chams:
@@ -156,12 +156,12 @@ def main():
                 cham = False
                 First = True
 
-        except Exception as e:  # catching Exceptions
+        except Exception as e: #  Catching Exceptions
             continue
 
 
 if __name__ == "__main__":
-    if update():# Versioncontrol
+    if update(): #  Versioncontrol
         import sys
         app = QtWidgets.QApplication(sys.argv)
         Dialog = QtWidgets.QMainWindow()
@@ -188,3 +188,6 @@ if __name__ == "__main__":
         r = requests.get("https://github.com/XanOpiat/Python-CSGO-Cheat/archive/refs/heads/main.zip", stream=True)
         z = zipfile.ZipFile(io.BytesIO(r.content))
         z.extractall(stringdir)
+else:
+    print("Program Is not allowed to be ran, by other programs!")
+    quit(0)

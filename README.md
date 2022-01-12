@@ -72,5 +72,6 @@ Restarting the program should work, If not open a issue with the error.
 ## Credit To: 
 https://github.com/Snaacky/ for his csgo cheats which i used to learn about CSGO cheating in python. \
 The unknowncheats and guided hacking community \
-https://github.com/lkean9 for helping me figure out multpile very wierd errors.
+https://github.com/lkean9 for helping me figure out multpile very wierd errors. \
+https://github.com/Bugleman for cleaning the code and adding the installer.py 
 

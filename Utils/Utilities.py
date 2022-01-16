@@ -9,7 +9,7 @@ from nets.get_netvars import *
 # Last update 2022,Jan,10
 
 
-versioncontrol = "2.0"
+versioncontrol = "2.1"
 
 
 def GetWindowText(handle, length=100):

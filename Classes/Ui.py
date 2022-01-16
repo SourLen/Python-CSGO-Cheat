@@ -3,7 +3,7 @@ import keyboard
 import configparser
 import os.path
 from PyQt5 import QtCore, QtGui, QtWidgets
-from Utils.Utilities import strtobool
+from Utils.Utilities import strtobool, is_key
 
 # Cleaned most of this file,
 # This file is working.
@@ -282,20 +282,20 @@ class Ui_MainWindow(object):
                     self.sens = int(self.lineEdit_6.text()) / 100
                     self.sens += 0.5
                 else:
-                    ctypes.windll.user32.MessageBoxW(0, "Please enter a value from 0 to 100", "Error in Config", 1)
+                    ctypes.windll.user32.MessageBoxW(0, "Please enter a value from 0 to 100", "Error in Config", 0)
             if self.checkBox_19.isChecked():
                 if 0 < int(self.lineEdit_7.text()) < 100:
                     self.random = 5 + (int(self.lineEdit_7.text()) / 5)
                 else:
-                    ctypes.windll.user32.MessageBoxW(0, "Please enter a value from 0 to 100", "Error in Config", 1)
-            if self.Aimbot and not keyboard.is_modifier(self.Aimbotkey):
-                ctypes.windll.user32.MessageBoxW(0, "Please enter an valid Aimbot Key", "Error in Config", 1)
+                    ctypes.windll.user32.MessageBoxW(0, "Please enter a value from 0 to 100", "Error in Config", 0)
+            if self.Aimbot and not is_key(self.Aimbotkey):
+                ctypes.windll.user32.MessageBoxW(0, "Please enter an valid Aimbot Key", "Error in Config", 0)
             if self.Silentaim and not self.Aimbot:
-                ctypes.windll.user32.MessageBoxW(0, "Select Aimbot if you wanna use Silentaim", "Error in Config", 1)
-            if self.Trigger and not keyboard.is_modifier(self.Triggerkey):
-                ctypes.windll.user32.MessageBoxW(0, "Please select a correct Triggerbotkey", "Error in Config", 1)
-            if self.Fov and not keyboard.is_modifier(self.Fovkey):
-                ctypes.windll.user32.MessageBoxW(0, "Please select a correct Fovkey", "Error in Config", 1)
+                ctypes.windll.user32.MessageBoxW(0, "Select Aimbot if you wanna use Silentaim", "Error in Config", 0)
+            if self.Trigger and not is_key(self.Triggerkey):
+                ctypes.windll.user32.MessageBoxW(0, "Please select a correct Triggerbotkey", "Error in Config", 0)
+            if self.Fov and not is_key(self.Fovkey):
+                ctypes.windll.user32.MessageBoxW(0, "Please select a correct Fovkey", "Error in Config", 0)
             self.label_14.setText("None/Unsaved")
             update = False
 

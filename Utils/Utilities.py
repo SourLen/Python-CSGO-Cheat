@@ -1,6 +1,7 @@
 import ctypes
 import requests
 import pymem
+import keyboard
 from nets.get_netvars import *
 
 # Cleaned all of this file,
@@ -45,3 +46,10 @@ def update():
 
 def strtobool(string):
     return string.lower() in ("true", 1)
+
+
+def is_key(string):
+    if keyboard.is_modifier(string) or (string.isalpha() and len(string) == 1):
+        return True
+    else:
+        return False

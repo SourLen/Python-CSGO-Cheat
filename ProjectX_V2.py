@@ -48,7 +48,7 @@ def main():
     s = 0
     n = 0
     while True:
-        time.sleep(0.005)
+        time.sleep(0.002)
         try:
             if not GetWindowText(GetForegroundWindow()).decode(
                     'cp1252') == "Counter-Strike: Global Offensive - Direct3D 9":

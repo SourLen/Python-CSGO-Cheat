@@ -1,7 +1,7 @@
 import ctypes
 import requests
 import pymem
-import keyboard
+import keyboard, mouse
 from nets.get_netvars import *
 
 # Cleaned all of this file,
@@ -52,4 +52,25 @@ def is_key(string):
     if keyboard.is_modifier(string) or (string.isalpha() and len(string) == 1):
         return True
     else:
+        return False
+
+def is_mouse(string):
+    list = ["left", "right", "middle", "wheel", "mouse4", "mouse5"]
+    if string in list:
+        return True
+    else:
+        return False
+
+def is_pressed(key):
+    if is_key(key):
+        return is_pressed(key)
+    elif is_mouse(key):
+        if key == "mouse4":
+            return mouse.is_pressed("x")
+        elif key == "mouse5":
+            return mouse.is_pressed("x2")
+        else:
+            return mouse.is_pressed(key)
+    else:
+        MessageBox = ctypes.windll.user32.MessageBoxW(0, "Not a valid Key", "Config Error", 0)
         return False

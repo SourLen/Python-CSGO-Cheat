@@ -14,7 +14,7 @@ from Utils.Autostrafe import AutoStrafe
 from Utils.Bhop import Bhop
 from Utils.Chams import Chams, ResetChams
 from Utils.Triggerbot import shootTrigger
-from Utils.Utilities import GetWindowText, GetForegroundWindow, update
+from Utils.Utilities import GetWindowText, GetForegroundWindow, update, is_pressed
 from Utils.WallhackFunctions import SetEntityGlow, GetEntityVars
 from Utils.rcs import rcse
 
@@ -48,6 +48,7 @@ def main():
     s = 0
     n = 0
     while True:
+        time.sleep(0.005)
         try:
             if not GetWindowText(GetForegroundWindow()).decode(
                     'cp1252') == "Counter-Strike: Global Offensive - Direct3D 9":
@@ -64,7 +65,7 @@ def main():
                     time.sleep(2)
                     continue
 
-            if ui.Aimbot and keyboard.is_pressed(ui.Aimbotkey) and player:  # Aimbot
+            if ui.Aimbot and is_pressed(ui.Aimbotkey) and player:  # Aimbot
                 if ui.random != 0 and random.x == 0 and random.y == 0 and random.z == 0 and first:
                     random = Vec3(randint(-ui.random, ui.random), randint(-ui.random, ui.random), 0)
                 target, localpos, targetpos = GetBestTarget(pm, client, engine, player, ui.spotted, ui.Baim, ui.Aimfov,
@@ -90,13 +91,13 @@ def main():
                         shootatTarget(pm, client, engine, localpos, targetpos, player, engine_pointer, ui.Silentaim,
                                       ui.AimRCS, ui.Aimbotkey)
 
-            if ui.Aimbot and not keyboard.is_pressed(ui.Aimbotkey):  # reseting Aimbot
+            if ui.Aimbot and not is_pressed(ui.Aimbotkey):  # reseting Aimbot
                 s = 0
                 n = 0
                 first = True
                 random = Vec3(0, 0, 0)
 
-            if ui.Trigger and keyboard.is_pressed(ui.Triggerkey):  # Trigger
+            if ui.Trigger and is_pressed(ui.Triggerkey):  # Trigger
                 shootTrigger(pm, crosshairid, client, localTeam, crosshairTeam, ui.Triggerkey)
 
             if ui.Noflash:  # Noflash
@@ -114,19 +115,19 @@ def main():
                 if not ui.Togglefov or not fovex:
                     fovshit = player + m_iDefaultFOV
                     pm.write_int(fovshit, 90)
-                if ui.Togglefov and keyboard.is_pressed(ui.Fovkey):
+                if ui.Togglefov and is_pressed(ui.Fovkey):
                     fovex = not fovex
                     time.sleep(0.25)
 
             if ui.Holdfov: # Holdfov
                 fovshit = player + m_iDefaultFOV
-                if keyboard.is_pressed(ui.Fovkey):
+                if is_pressed(ui.Fovkey):
                     pm.write_int(fovshit, ui.Fovvaluke)
                 else:
                     pm.write_int(fovshit, 90)
 
             if ui.Bhop: # Bhop
-                if keyboard.is_pressed("space"):
+                if is_pressed("space"):
                     Bhop(pm, client, player)
 
             if ui.auto_strafe and y_angle: # Autostrafe

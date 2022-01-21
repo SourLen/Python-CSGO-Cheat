@@ -56,7 +56,7 @@ print(antivacv2)
 user32 = ctypes.windll.user32
 def is_press(key):
     if key != "x2" and key != "x" and key != "right" and key != "wheel" and key != "left":
-        return keyboard.is_pressed(key)
+        return is_pressed(key)
     else:
         return mouse.is_pressed(key)
 

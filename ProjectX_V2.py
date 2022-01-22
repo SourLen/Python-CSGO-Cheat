@@ -158,6 +158,7 @@ def main():
                 First = True
 
         except Exception as e: #  Catching Exceptions
+            #print(e)
             continue
 
 

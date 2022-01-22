@@ -63,7 +63,7 @@ def is_mouse(string):
 
 def is_pressed(key):
     if is_key(key):
-        return is_pressed(key)
+        return keyboard.is_pressed(key)
     elif is_mouse(key):
         if key == "mouse4":
             return mouse.is_pressed("x")

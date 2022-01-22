@@ -12,7 +12,7 @@ import random
 # Im not going to clean this file, and leave it as is.
 
 
-offsets = 'https://raw.githubusercontent.com/XanOpiat/Python-CSGO-Cheat/main/offsets/offsets.json'
+offsets = 'https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json'
 response = requests.get( offsets ).json()
 bhop_taste = "space"
 m_iCompetitiveWins = int(response["netvars"]["m_iCompetitiveWins"])
@@ -26,7 +26,7 @@ m_fFlags = int( response["netvars"]["m_fFlags"] )
 dwForceAttack = int( response["signatures"]["dwForceAttack"] )
 m_iCrosshairId = int( response["netvars"]["m_iCrosshairId"] )
 m_flFlashMaxAlpha = int( response["netvars"]["m_flFlashMaxAlpha"] )
-m_iDefaultFOV = (0x332C)
+m_iDefaultFOV = (13116)
 dwClientState = int( response["signatures"]["dwClientState"] )
 m_iHealth = int( response["netvars"]["m_iHealth"] )
 dwViewMatrix = int( response["signatures"]["dwViewMatrix"] )
@@ -56,7 +56,7 @@ print(antivacv2)
 user32 = ctypes.windll.user32
 def is_press(key):
     if key != "x2" and key != "x" and key != "right" and key != "wheel" and key != "left":
-        return is_pressed(key)
+        return keyboard.is_pressed(key)
     else:
         return mouse.is_pressed(key)
 
@@ -474,205 +474,212 @@ class Ui_MainWindow( object ):
         oldpunchx = 0.0
         oldpunchy = 0.0
         while True:
-
-            if not GetWindowText(GetForegroundWindow()).decode('cp1252') == "Counter-Strike: Global Offensive":
-                time.sleep(1)
-                continue
-
-            pm.write_uchar( engine + dwbSendPackets, 1 )
-            target = None
-            olddistx = 111111111111
-            olddisty = 111111111111
-            if client and engine and pm:
-                try:
-                    player = pm.read_uint( client + dwLocalPlayer )
-                    engine_pointer = pm.read_uint( engine + dwClientState )
-                    glow_manager = pm.read_uint( client + dwGlowObjectManager )
-                    crosshairID = pm.read_uint( player + m_iCrosshairId )
-                    getcrosshairTarget = pm.read_uint( client + dwEntityList + (crosshairID - 1) * 0x10 )
-                    immunitygunganme = pm.read_uint( getcrosshairTarget + m_bGunGameImmunity )
-                    localTeam = pm.read_uint( player + m_iTeamNum )
-                    crosshairTeam = pm.read_uint( getcrosshairTarget + m_iTeamNum )
-                except:
-                    print( "Round not started yet" )
-                    time.sleep( 5 )
+            try:
+                if not GetWindowText(GetForegroundWindow()).decode(
+                        'cp1252') == "Counter-Strike: Global Offensive - Direct3D 9":
+                    time.sleep(1)
                     continue
 
-            for i in range( 1, 64 ):
-                entity = pm.read_uint( client + dwEntityList + i * 0x10 )
-
-                if entity:
+                pm.write_uchar( engine + dwbSendPackets, 1 )
+                target = None
+                olddistx = 111111111111
+                olddisty = 111111111111
+                if client and engine and pm:
                     try:
-                        entity_glow = pm.read_uint( entity + m_iGlowIndex )
-                        entity_team_id = pm.read_uint( entity + m_iTeamNum )
-                        entity_isdefusing = pm.read_uint( entity + m_bIsDefusing )
-                        entity_hp = pm.read_uint( entity + m_iHealth )
-                        entity_dormant = pm.read_uint( entity + m_bDormant )
+                        player = pm.read_uint( client + dwLocalPlayer )
+                        engine_pointer = pm.read_uint( engine + dwClientState )
+                        glow_manager = pm.read_uint( client + dwGlowObjectManager )
+                        crosshairID = pm.read_uint( player + m_iCrosshairId )
+                        getcrosshairTarget = pm.read_uint( client + dwEntityList + (crosshairID - 1) * 0x10 )
+                        immunitygunganme = pm.read_uint( getcrosshairTarget + m_bGunGameImmunity )
+                        localTeam = pm.read_uint( player + m_iTeamNum )
+                        crosshairTeam = pm.read_uint( getcrosshairTarget + m_iTeamNum )
                     except:
-                        print( "Could not load Players Infos (Should only do this once)" )
-                        time.sleep( 2 )
+                        print( "Round not started yet" )
+                        time.sleep( 5 )
                         continue
 
-                    if entity_hp > 50 and not entity_hp == 100:
-                        r, g, b = 255, 165, 0
-                    elif entity_hp < 50:
-                        r, g, b = 255, 0, 0
-                    elif entity_hp == 100 and entity_team_id == 2:
-                        r, g, b = 0, 255, 0
-                    else:
-                        r, g, b = 0, 255, 0
+                for i in range( 1, 64 ):
+                    entity = pm.read_uint( client + dwEntityList + i * 0x10 )
 
-                    if self.aimc and localTeam != entity_team_id and entity_hp > 0:
-                        entity_bones = pm.read_uint( entity + m_dwBoneMatrix )
-                        localpos_x_angles = pm.read_float( engine_pointer + dwClientState_ViewAngles )
-                        localpos_y_angles = pm.read_float( engine_pointer + dwClientState_ViewAngles + 0x4 )
-                        localpos1 = pm.read_float( player + m_vecOrigin )
-                        localpos2 = pm.read_float( player + m_vecOrigin + 4 )
-                        localpos_z_angles = pm.read_float( player + m_vecViewOffset + 0x8 )
-                        localpos3 = pm.read_float( player + m_vecOrigin + 8 ) + localpos_z_angles
-                        if self.baim:
-                            try:
-                                entitypos_x = pm.read_float( entity_bones + 0x30 * 5 + 0xC )
-                                entitypos_y = pm.read_float( entity_bones + 0x30 * 5 + 0x1C )
-                                entitypos_z = pm.read_float( entity_bones + 0x30 * 5 + 0x2C )
-                            except:
-                                continue
+                    if entity:
+                        try:
+                            entity_glow = pm.read_uint( entity + m_iGlowIndex )
+                            entity_team_id = pm.read_uint( entity + m_iTeamNum )
+                            entity_isdefusing = pm.read_uint( entity + m_bIsDefusing )
+                            entity_hp = pm.read_uint( entity + m_iHealth )
+                            entity_dormant = pm.read_uint( entity + m_bDormant )
+                        except:
+                            print( "Could not load Players Infos (Should only do this once)" )
+                            time.sleep( 2 )
+                            continue
+
+                        if entity_hp > 50 and not entity_hp == 100:
+                            r, g, b = 255, 165, 0
+                        elif entity_hp < 50:
+                            r, g, b = 255, 0, 0
+                        elif entity_hp == 100 and entity_team_id == 2:
+                            r, g, b = 0, 255, 0
                         else:
-                            try:
-                                entitypos_x = pm.read_float( entity_bones + 0x30 * 8 + 0xC )
-                                entitypos_y = pm.read_float( entity_bones + 0x30 * 8 + 0x1C )
-                                entitypos_z = pm.read_float( entity_bones + 0x30 * 8 + 0x2C )
-                            except:
-                                continue
-                        X, Y = calcangle( localpos1, localpos2, localpos3, entitypos_x, entitypos_y, entitypos_z )
-                        newdist_x, newdist_y = calc_distance( localpos_x_angles, localpos_y_angles, X, Y )
-                        if newdist_x < olddistx and newdist_y < olddisty and newdist_x <= self.aimfov and newdist_y <= self.aimfov:
-                            olddistx, olddisty = newdist_x, newdist_y
-                            target, target_hp, target_dormant = entity, entity_hp, entity_dormant
-                            target_x, target_y, target_z = entitypos_x, entitypos_y, entitypos_z
-                    if self.aimc and is_press( self.aimkey ) and player:
-                        if target and target_hp > 0 and not target_dormant:
-                            pitch, yaw = calcangle( localpos1, localpos2, localpos3, target_x, target_y, target_z )
-                            normalize_x, normalize_y = normalizeAngles( pitch, yaw )
-                            punchx = pm.read_float( player + m_aimPunchAngle )
-                            punchy = pm.read_float( player + m_aimPunchAngle + 0x4 )
-                            if self.silentshit:
-                                pm.write_uchar( engine + dwbSendPackets, 0 )
-                                Commands = pm.read_uint( client + dwInput + 0xF4 )
-                                VerifedCommands = pm.read_uint( client + dwInput + 0xF8 )
-                                Desired = pm.read_uint( engine_pointer + clientstate_last_outgoing_command ) + 2
-                                OldUser = Commands + ((Desired - 1) % 150) * 100
-                                VerifedOldUser = VerifedCommands + ((Desired - 1) % 150) * 0x68
-                                m_buttons = pm.read_uint( OldUser + 0x30 )
-                                Net_Channel = pm.read_uint( engine_pointer + clientstate_net_channel )
-                                if pm.read_uint( Net_Channel + 0x18 ) < Desired:
-                                    pass
-                                elif self.aimrcs:
-                                    pm.write_float( OldUser + 0x0C, normalize_x )
-                                    pm.write_float( OldUser + 0x10, normalize_y)
-                                    pm.write_int( OldUser + 0x30, m_buttons | (1 << 0) )
-                                    pm.write_float( VerifedOldUser + 0x0C, normalize_x - (punchx * 2) )
-                                    pm.write_float( VerifedOldUser + 0x10, normalize_y - (punchy * 2) )
-                                    pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
-                                    pm.write_uchar( engine + dwbSendPackets, 1 )
-                                else:
-                                    pm.write_float( OldUser + 0x0C, normalize_x )
-                                    pm.write_float( OldUser + 0x10, normalize_y )
-                                    pm.write_int( OldUser + 0x30, m_buttons | (1 << 0) )
-                                    pm.write_float( VerifedOldUser + 0x0C, normalize_x )
-                                    pm.write_float( VerifedOldUser + 0x10, normalize_y )
-                                    pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
-                                    pm.write_uchar( engine + dwbSendPackets, 1 )
+                            r, g, b = 0, 255, 0
 
-                            elif self.aimrcs and pm.read_uint( player + m_iShotsFired ) > 1:
-                                pm.write_float( engine_pointer + dwClientState_ViewAngles, normalize_x - (punchx * 2) )
-                                pm.write_float( engine_pointer + dwClientState_ViewAngles + 0x4,
-                                                normalize_y - (punchy * 2) )
+                        if self.aimc and localTeam != entity_team_id and entity_hp > 0:
+                            entity_bones = pm.read_uint( entity + m_dwBoneMatrix )
+                            localpos_x_angles = pm.read_float( engine_pointer + dwClientState_ViewAngles )
+                            localpos_y_angles = pm.read_float( engine_pointer + dwClientState_ViewAngles + 0x4 )
+                            localpos1 = pm.read_float( player + m_vecOrigin )
+                            localpos2 = pm.read_float( player + m_vecOrigin + 4 )
+                            localpos_z_angles = pm.read_float( player + m_vecViewOffset + 0x8 )
+                            localpos3 = pm.read_float( player + m_vecOrigin + 8 ) + localpos_z_angles
+                            if self.baim:
+                                try:
+                                    entitypos_x = pm.read_float( entity_bones + 0x30 * 5 + 0xC )
+                                    entitypos_y = pm.read_float( entity_bones + 0x30 * 5 + 0x1C )
+                                    entitypos_z = pm.read_float( entity_bones + 0x30 * 5 + 0x2C )
+                                except:
+                                    continue
                             else:
-                                pm.write_float( engine_pointer + dwClientState_ViewAngles, normalize_x )
-                                pm.write_float( engine_pointer + dwClientState_ViewAngles + 0x4,
-                                                normalize_y )
+                                try:
+                                    entitypos_x = pm.read_float( entity_bones + 0x30 * 8 + 0xC )
+                                    entitypos_y = pm.read_float( entity_bones + 0x30 * 8 + 0x1C )
+                                    entitypos_z = pm.read_float( entity_bones + 0x30 * 8 + 0x2C )
+                                except:
+                                    continue
+                            X, Y = calcangle( localpos1, localpos2, localpos3, entitypos_x, entitypos_y, entitypos_z )
+                            newdist_x, newdist_y = calc_distance( localpos_x_angles, localpos_y_angles, X, Y )
+                            if newdist_x < olddistx and newdist_y < olddisty and newdist_x <= self.aimfov and newdist_y <= self.aimfov:
+                                olddistx, olddisty = newdist_x, newdist_y
+                                target, target_hp, target_dormant = entity, entity_hp, entity_dormant
+                                target_x, target_y, target_z = entitypos_x, entitypos_y, entitypos_z
+                        if self.aimc and is_press( self.aimkey ) and player:
+                            if target and target_hp > 0 and not target_dormant:
+                                pitch, yaw = calcangle( localpos1, localpos2, localpos3, target_x, target_y, target_z )
+                                normalize_x, normalize_y = normalizeAngles( pitch, yaw )
+                                punchx = pm.read_float( player + m_aimPunchAngle )
+                                punchy = pm.read_float( player + m_aimPunchAngle + 0x4 )
+                                if self.silentshit:
+                                    pm.write_uchar( engine + dwbSendPackets, 0 )
+                                    Commands = pm.read_uint( client + dwInput + 0xF4 )
+                                    VerifedCommands = pm.read_uint( client + dwInput + 0xF8 )
+                                    Desired = pm.read_uint( engine_pointer + clientstate_last_outgoing_command ) + 2
+                                    OldUser = Commands + ((Desired - 1) % 150) * 100
+                                    VerifedOldUser = VerifedCommands + ((Desired - 1) % 150) * 0x68
+                                    m_buttons = pm.read_uint( OldUser + 0x30 )
+                                    Net_Channel = pm.read_uint( engine_pointer + clientstate_net_channel )
+                                    if pm.read_uint( Net_Channel + 0x18 ) < Desired:
+                                        pass
+                                    elif self.aimrcs:
+                                        pm.write_float( OldUser + 0x0C, normalize_x )
+                                        pm.write_float( OldUser + 0x10, normalize_y)
+                                        pm.write_int( OldUser + 0x30, m_buttons | (1 << 0) )
+                                        pm.write_float( VerifedOldUser + 0x0C, normalize_x - (punchx * 2) )
+                                        pm.write_float( VerifedOldUser + 0x10, normalize_y - (punchy * 2) )
+                                        pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
+                                        pm.write_uchar( engine + dwbSendPackets, 1 )
+                                    else:
+                                        pm.write_float( OldUser + 0x0C, normalize_x )
+                                        pm.write_float( OldUser + 0x10, normalize_y )
+                                        pm.write_int( OldUser + 0x30, m_buttons | (1 << 0) )
+                                        pm.write_float( VerifedOldUser + 0x0C, normalize_x )
+                                        pm.write_float( VerifedOldUser + 0x10, normalize_y )
+                                        pm.write_int( VerifedOldUser + 0x30, m_buttons | (1 << 0) )
+                                        pm.write_uchar( engine + dwbSendPackets, 1 )
 
-                    if self.radarc == True:
-                        pm.write_int( entity + m_bSpotted, 1 )
+                                elif self.aimrcs and pm.read_uint( player + m_iShotsFired ) > 1:
+                                    pm.write_float( engine_pointer + dwClientState_ViewAngles, normalize_x - (punchx * 2) )
+                                    pm.write_float( engine_pointer + dwClientState_ViewAngles + 0x4,
+                                                    normalize_y - (punchy * 2) )
+                                else:
+                                    pm.write_float( engine_pointer + dwClientState_ViewAngles, normalize_x )
+                                    pm.write_float( engine_pointer + dwClientState_ViewAngles + 0x4,
+                                                    normalize_y )
 
-                    if self.whc and entity_team_id == 2 and (
-                            eteam or localTeam != 2) and not entity_dormant:  # Terrorist Glow
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x8, float( r ) )  # R
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0xC, float( g ) )  # G
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x10, float( b ) )  # B
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x14, float( 255 ) )  # A
+                        if self.radarc == True:
+                            pm.write_int( entity + m_bSpotted, 1 )
 
-                        pm.write_int( glow_manager + entity_glow * 0x38 + 0x28, 1 )  # Enable
+                        if self.whc and entity_team_id == 2 and (
+                                eteam or localTeam != 2) and not entity_dormant:
+
+                            pm.write_float( glow_manager + entity_glow * 0x38 + 0x8, float( r ) )  # R
+                            pm.write_float( glow_manager + entity_glow * 0x38 + 0xC, float( g ) )  # G
+                            pm.write_float( glow_manager + entity_glow * 0x38 + 0x10, float( b ) )  # B
+                            pm.write_float( glow_manager + entity_glow * 0x38 + 0x14, float( 255 ) )  # A
+
+                            pm.write_int( glow_manager + entity_glow * 0x38 + 0x28, 1 )  # Enable
 
 
-                    elif self.whc and entity_team_id == 3 and (
-                            eteam or localTeam != 3) and not entity_dormant:  # Anti Glow
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x8, float( r ) )  # R
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0xC, float( g ) )  # G
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x10, float( b ) )  # B
-                        pm.write_float( glow_manager + entity_glow * 0x38 + 0x14, float( 255 ) )  # A
+                        elif self.whc and entity_team_id == 3 and (
+                                eteam or localTeam != 3) and not entity_dormant:  # Anti Glow
 
-                        pm.write_int( glow_manager + entity_glow * 0x38 + 0x28, 1 )  # Enable
+                            pm.write_float( glow_manager + entity_glow * 0x38 + 0x8, float( r ) )  # R
+                            pm.write_float( glow_manager + entity_glow * 0x38 + 0xC, float( g ) )  # G
+                            pm.write_float( glow_manager + entity_glow * 0x38 + 0x10, float( b ) )  # B
+                            pm.write_float( glow_manager + entity_glow * 0x38 + 0x14, float( 255 ) )  # A
 
+                            pm.write_int( glow_manager + entity_glow * 0x38 + 0x28, 1 )  # Enable
+
+                        else:
+                            pass
+
+
+                if self.trigc and is_press(
+                        self.triggerkey ) and 0 < crosshairID <= 64 and localTeam != crosshairTeam:
+                    pm.write_int( client + dwForceAttack, 6 )
+
+                if self.nf and player:
+                    flash_value = player + m_flFlashMaxAlpha
+                    if flash_value:
+                        self.pm.write_float( flash_value, float( 0 ) )
+
+                if self.rcse:
+                    if pm.read_uint( player + m_iShotsFired ) > 2:
+                        rcs_x = pm.read_float( engine_pointer + dwClientState_ViewAngles )
+                        rcs_y = pm.read_float( engine_pointer + dwClientState_ViewAngles + 0x4 )
+                        punchx = pm.read_float( player + m_aimPunchAngle )
+                        punchy = pm.read_float( player + m_aimPunchAngle + 0x4 )
+                        newrcsx = rcs_x - (punchx - oldpunchx) * 2
+                        newrcsy = rcs_y - (punchy - oldpunchy) * 2
+                        oldpunchx = punchx
+                        oldpunchy = punchy
+                        if nanchecker( newrcsx, newrcsy ) and checkangles( newrcsx, newrcsy ):
+                            pm.write_float( engine_pointer + dwClientState_ViewAngles, newrcsx )
+                            pm.write_float( engine_pointer + dwClientState_ViewAngles + 0x4, newrcsy )
                     else:
-                        pass
+                        oldpunchx = 0.0
+                        oldpunchy = 0.0
+                        newrcsx = 0.0
+                        newrcsy = 0.0
 
 
-            if self.trigc and is_press(
-                    self.triggerkey ) and 0 < crosshairID <= 64 and localTeam != crosshairTeam:
-                pm.write_int( client + dwForceAttack, 6 )
+                if not self.larryfov:
 
-            if self.nf and player:
-                flash_value = player + m_flFlashMaxAlpha
-                if flash_value:
-                    self.pm.write_float( flash_value, float( 0 ) )
+                    if self.fovt and player and self.fovtog:
+                        fovshit = player + m_iDefaultFOV
+                        pm.write_int( fovshit, self.fovvalue )
 
-            if self.rcse:
-                if pm.read_uint( player + m_iShotsFired ) > 2:
-                    rcs_x = pm.read_float( engine_pointer + dwClientState_ViewAngles )
-                    rcs_y = pm.read_float( engine_pointer + dwClientState_ViewAngles + 0x4 )
-                    punchx = pm.read_float( player + m_aimPunchAngle )
-                    punchy = pm.read_float( player + m_aimPunchAngle + 0x4 )
-                    newrcsx = rcs_x - (punchx - oldpunchx) * 2
-                    newrcsy = rcs_y - (punchy - oldpunchy) * 2
-                    oldpunchx = punchx
-                    oldpunchy = punchy
-                    if nanchecker( newrcsx, newrcsy ) and checkangles( newrcsx, newrcsy ):
-                        pm.write_float( engine_pointer + dwClientState_ViewAngles, newrcsx )
-                        pm.write_float( engine_pointer + dwClientState_ViewAngles + 0x4, newrcsy )
-                else:
-                    oldpunchx = 0.0
-                    oldpunchy = 0.0
-                    newrcsx = 0.0
-                    newrcsy = 0.0
-            if not self.larryfov:
+                    if not self.fovt or not self.fovtog:
+                        fovshit = player + m_iDefaultFOV
+                        pm.write_int( fovshit, 90 )
 
-                if self.fovt and player and self.fovtog:
+                    if self.fovt and is_press( self.fovkey ):
+                        self.fovtog = not self.fovtog
+                        time.sleep( 0.25 )
+
+                if self.larryfov and player:
                     fovshit = player + m_iDefaultFOV
-                    pm.write_int( fovshit, self.fovvalue )
+                    if is_press( self.fovkey ):
+                        self.pm.write_int( fovshit, self.fovvalue )
+                    else:
+                        self.pm.write_int( fovshit, 90 )
 
-                if not self.fovt or not self.fovtog:
-                    fovshit = player + m_iDefaultFOV
-                    pm.write_int( fovshit, 90 )
-
-                if self.fovt and is_press( self.fovkey ):
-                    self.fovtog = not self.fovtog
-                    time.sleep( 0.25 )
-
-            if self.larryfov and player:
-                fovshit = player + m_iDefaultFOV
-                if is_press( self.fovkey ):
-                    self.pm.write_int( fovshit, self.fovvalue )
-                else:
-                    self.pm.write_int( fovshit, 90 )
-
-            if self.bhc:
-                if is_press( "space" ):
-                    force_jump = client + dwForceJump
-                    on_ground = pm.read_uint( player + m_fFlags )
-                    if player and on_ground == 257 or on_ground == 263:
-                        pm.write_int( force_jump, 6 )
+                if self.bhc:
+                    if is_press( "space" ):
+                        force_jump = client + dwForceJump
+                        on_ground = pm.read_uint( player + m_fFlags )
+                        if player and on_ground == 257 or on_ground == 263:
+                            pm.write_int( force_jump, 6 )
+            except:
+                continue
 
     def rankreveal(self):
         pm = pymem.Pymem( "csgo.exe" )

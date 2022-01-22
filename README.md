@@ -24,7 +24,8 @@ Video Tutorial: https://youtu.be/eaP6Hr_uzSs - Outdated for v2!
 -Customizable FOV changer \
 -Rank reveal in Competitive \
 -Auto-updating offsets \
--Chams 
+-Chams \
+-Mouse and Keyboard support, you may find a list of the accepted mouse buttons [here](https://github.com/XanOpiat/Python-CSGO-Cheat/blob/main/Utils/Utilities.py#L58)
 
 ## Getting Started:
 

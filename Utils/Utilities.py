@@ -9,7 +9,7 @@ from nets.get_netvars import *
 # Last update 2022,Jan,10
 
 
-versioncontrol = "2.5"
+versioncontrol = "2.6"
 
 
 def GetWindowText(handle, length=100):
@@ -49,7 +49,7 @@ def strtobool(string):
 
 
 def is_key(string):
-    if keyboard.is_modifier(string) or (string.isalpha() and len(string) == 1):
+    if keyboard.is_modifier(string) or (string.isalpha() and len(string) == 1) or string == "space":
         return True
     else:
         return False
@@ -72,5 +72,5 @@ def is_pressed(key):
         else:
             return mouse.is_pressed(key)
     else:
-        MessageBox = ctypes.windll.user32.MessageBoxW(0, "Not a valid Key", "Config Error", 0)
+        MessageBox = ctypes.windll.user32.MessageBoxW(0, f"{key.upper()} is not a valid Key", "Config Error", 0)
         return False

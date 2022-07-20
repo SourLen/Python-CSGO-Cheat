@@ -231,7 +231,7 @@ class Ui_MainWindow(object):
             if self.comboBox.currentText() == "GREEN":
                 self.Ergb = [0, 255, 0]
             elif self.comboBox.currentText() == "RED":
-                self.Ergb = [255, 0, 255]
+                self.Ergb = [255, 0, 0]
             elif self.comboBox.currentText() == "BLUE":
                 self.Ergb = [0, 0, 255]
             elif self.comboBox.currentText() == "ORANGE":

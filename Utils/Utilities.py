@@ -9,8 +9,8 @@ from nets.get_netvars import *
 # Last update 2022,Jan,10
 
 
-versioncontrol = "2.6"
-
+versioncontrol = "2.7"
+keylist = ["space", "tab", "capslock"]
 
 def GetWindowText(handle, length=100):
     user32 = ctypes.windll.user32
@@ -49,7 +49,7 @@ def strtobool(string):
 
 
 def is_key(string):
-    if keyboard.is_modifier(string) or (string.isalpha() and len(string) == 1) or string == "space":
+    if keyboard.is_modifier(string) or (string.isalpha() and len(string) == 1) or string in keylist:
         return True
     else:
         return False

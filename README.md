@@ -6,6 +6,7 @@ Requires Python3 and pip (aswell as CSGO obviously, has not been adapted to CS2)
 Video Tutorial: https://youtu.be/eaP6Hr_uzSs - Outdated for v2!
 
 ## Features
+Many of the features here are implemented in this repository for the first time in Python. \
 -Aimbot (Body or head) \
 -Smooth Aimbot \
 -Random Aimbot\
@@ -23,7 +24,7 @@ Video Tutorial: https://youtu.be/eaP6Hr_uzSs - Outdated for v2!
 -Rank reveal in Competitive \
 -Auto-updating offsets \
 -Chams \
--Mouse and Keyboard support, you may find a list of the accepted mouse buttons [here](https://github.com/XanOpiat/Python-CSGO-Cheat/blob/main/Utils/Utilities.py#L58)
+-Mouse and Keyboard support, you may find a list of the accepted mouse buttons [here](https://github.com/SourLen/Python-CSGO-Cheat/blob/main/Utils/Utilities.py#L58)
 
 ## Getting Started:
 

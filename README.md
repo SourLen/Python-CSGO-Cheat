@@ -2,7 +2,6 @@
 All in one external CSGO cheat written in python.
 It is probably undetected by VAC but im not reponsible for any future bans if you use this cheat in competitive. \
 This is ONLY MEANT AS A POC and a learning project for me into the structure of memory managment and video games. \
-
 Requires Python3 and pip (aswell as CSGO obviously, has not been adapted to CS2).                                           
 Video Tutorial: https://youtu.be/eaP6Hr_uzSs - Outdated for v2!
 
